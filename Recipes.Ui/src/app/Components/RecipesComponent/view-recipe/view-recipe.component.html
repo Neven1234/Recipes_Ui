@@ -4,7 +4,8 @@
       <mat-card-title-group>
         <mat-card-title>{{recipe.name}}</mat-card-title>
         <mat-card-subtitle>Name</mat-card-subtitle>
-        <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+        <img mat-card-lg-image *ngIf="recipe.image==null" src="assets/img/default.jpg" >
+        <img mat-card-lg-image *ngIf="recipe.image!=null" src={{recipe.image}}  >
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>

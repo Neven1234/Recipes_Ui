@@ -3,7 +3,8 @@
         <mat-card-header>
           <mat-card-title>{{ recipe.name }}</mat-card-title>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image *ngIf="recipe.image==null" src="assets/img/default.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image *ngIf="recipe.image!=null" src={{recipe.image}} alt="Photo of a Shiba Inu">
         <mat-card-actions>
           <a [routerLink]="['/View',recipe.id]"><button class="btn btn-primary pull-right" style="background-color: black; color:white" > Details</button></a>
         </mat-card-actions>

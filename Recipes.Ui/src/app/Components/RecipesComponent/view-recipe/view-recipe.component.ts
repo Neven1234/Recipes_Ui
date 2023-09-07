@@ -15,7 +15,7 @@ export class ViewRecipeComponent {
     name:'',
     ingredients:'',
     steps:'',
-    imageName:'',
+    image:'',
   }
   ngOnInit():void{
     this.route.paramMap.subscribe({

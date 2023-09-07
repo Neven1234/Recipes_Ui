@@ -20,6 +20,16 @@ export class RecipesService {
   addedIngredient.id=0;
   return this.http.post<Ingrediant>(this.basUrl+'/api/Ingredients',addedIngredient);
  }
+ 
+ //image
+ postFile(fileToUpload:File){
+  const endpoint=this.basUrl+'/api/Recipe/ImageUpload';
+  const formData:FormData=new FormData();
+  formData.append('Image',fileToUpload,fileToUpload.name);
+  return this.http.post(endpoint,formData);
+ }
+
+
   //Recipes
   getAllRecipes():Observable<Recipe[]>{
     return this.http.get<Recipe[]>(this.basUrl+'/api/Recipe')
@@ -31,4 +41,6 @@ export class RecipesService {
   getRecipe(id:number):Observable<Recipe>{
     return this.http.get<Recipe>(this.basUrl+'/api/Recipe/'+id)
   }
+
+
 }

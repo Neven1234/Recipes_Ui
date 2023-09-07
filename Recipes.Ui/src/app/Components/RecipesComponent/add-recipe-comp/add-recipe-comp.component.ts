@@ -1,5 +1,6 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, isStandalone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, Router } from '@angular/router';
 import { Ingrediant } from 'src/app/Models/ingrediant';
 import { Recipe } from 'src/app/Models/ReipeModel';
 import { RecipesService } from 'src/app/Service/recipes.service';
@@ -14,14 +15,20 @@ export class AddRecipeCompComponent {
     name:'',
     ingredients:'',
     steps:'',
-    imageName:'',
+    image:'',
   }
   NewIngrediant:Ingrediant={
     id:0,
     name:''
   }
   ingrediants:Ingrediant[]=[]
-  constructor(private recipeService:RecipesService, private Router:Router){}
+  
+
+  selecte:boolean=false; 
+  imageUrl:string='/assets/img/default.jpg'
+  fileToUpload:any;
+  selectedFile:File;
+  constructor(private recipeService:RecipesService, private Router:Router, private http:HttpClient){}
   ngOnInit():void{
     this.recipeService.GetAllIngredients().subscribe({
       next:(res)=>{
@@ -52,17 +59,44 @@ export class AddRecipeCompComponent {
   
   addRecipe()
   {
+
+    if(this.fileToUpload!=null){
+      this.recipe.image="https://localhost:7206/Resourcess/images/"+this.fileToUpload.name;
+    }
+    else{
+      this.recipe.image=null
+    }
     
+    console.log("haa: "+this.recipe.image)
     this.recipeService.addREcipe(this.recipe)
     .subscribe({
-      next:(addedTask)=>{
+      next:(_addedTask)=>{
         console.log('tm')
       },
       error:(response)=>{
         this.Router.navigate(['']);
-        console.log('the fkn error '+response);
+        console.log(response);
       }
 
     })
+
   }
+  //upload image
+  handelDileInput(file:FileList){
+    this.fileToUpload=file.item(0);
+    var reader=new FileReader();
+    reader.onload=(event:any)=>{
+      this.imageUrl=event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+    console.log('esm el soraaa: '+this.fileToUpload.name)
+  }
+ onSubmit(Image){
+  this.recipeService.postFile(this.fileToUpload).subscribe({
+    next:(res)=>{
+      console.log('done');
+    }
+  })
+ }
 }
+
