@@ -18,7 +18,8 @@ export class RecipesService {
   }
  AddIngredient(addedIngredient:Ingrediant):Observable<Ingrediant>{
   addedIngredient.id=0;
-  return this.http.post<Ingrediant>(this.basUrl+'/api/Ingredients',addedIngredient);
+  const options = {responseType: 'text' as 'json'};
+  return this.http.post<Ingrediant>(this.basUrl+'/api/Ingredients',addedIngredient,options);
  }
  
  //image
@@ -36,11 +37,19 @@ export class RecipesService {
   }
   addREcipe(addRequest:Recipe):Observable<Recipe>{
     addRequest.id=0;
-    return this.http.post<Recipe>(this.basUrl +'/api/Recipe',addRequest);
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<Recipe>(this.basUrl +'/api/Recipe',addRequest,options);
   }
   getRecipe(id:number):Observable<Recipe>{
     return this.http.get<Recipe>(this.basUrl+'/api/Recipe/'+id)
   }
-
-
+ 
+  EditRecipe(id:number,edditedReicpe:Recipe):Observable<Recipe>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.put<Recipe>(this.basUrl+'/api/Recipe/'+id,edditedReicpe,options)
+  }
+ DeletRecipe(id:number):Observable<Recipe>{
+  const options = {responseType: 'text' as 'json'};
+  return this.http.delete<Recipe>(this.basUrl+'/api/Recipe/'+id,options)
+ }
 }

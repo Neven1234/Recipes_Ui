@@ -4,12 +4,17 @@ import { Event, Router } from '@angular/router';
 import { Ingrediant } from 'src/app/Models/ingrediant';
 import { Recipe } from 'src/app/Models/ReipeModel';
 import { RecipesService } from 'src/app/Service/recipes.service';
+
+import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-add-recipe-comp',
   templateUrl: './add-recipe-comp.component.html',
   styleUrls: ['./add-recipe-comp.component.css'],
 })
 export class AddRecipeCompComponent {
+  removable:true
+ selectable:true
+ addOnBlur:true
   recipe:Recipe={
     id:0,
     name:'',
@@ -22,8 +27,17 @@ export class AddRecipeCompComponent {
     name:''
   }
   ingrediants:Ingrediant[]=[]
+  listOfSelectedIngrediants:string[]=[]
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.listOfSelectedIngrediants, event.previousIndex, event.currentIndex);
+  }
+  remove(ingrediant: string): void {
+    const index = this.listOfSelectedIngrediants.indexOf(ingrediant);
   
-
+    if (index >= 0) {
+      this.listOfSelectedIngrediants.splice(index, 1);
+    }
+  }
   selecte:boolean=false; 
   imageUrl:string='/assets/img/default.jpg'
   fileToUpload:any;
@@ -52,8 +66,9 @@ export class AddRecipeCompComponent {
   getSelectedValue(value:any){
   
     // Print selected value
-    this.selectedvalue+=', '+value;
-    this.recipe.ingredients=this.selectedvalue;
+    //this.selectedvalue+=', '+value;
+   // this.recipe.ingredients=this.selectedvalue;
+   this.listOfSelectedIngrediants.push(value)
     console.log("the fvlue yam"+value);
   }
   
@@ -68,13 +83,16 @@ export class AddRecipeCompComponent {
     }
     
     console.log("haa: "+this.recipe.image)
+    this.recipe.ingredients=this.listOfSelectedIngrediants.toString()
     this.recipeService.addREcipe(this.recipe)
     .subscribe({
       next:(_addedTask)=>{
         console.log('tm')
+        alert('Recipe Added successfully');
+        this.Router.navigate(['']);
       },
       error:(response)=>{
-        this.Router.navigate(['']);
+        
         console.log(response);
       }
 

@@ -18,7 +18,22 @@
                 </div>
                 <div class="form-group">
                     <h3 for="Ing">Ingrediants</h3>
-                    <p>{{selectedvalue}} </p>
+                    <mat-chip-set class="example-chip"
+                    cdkDropList 
+                    cdkDropListOrientation="horizontal"
+                    (cdkDropListDropped)="drop($any($event))">
+                    <mat-chip
+                        class="example-box"
+                        cdkDrag
+                        (removed)="remove(ingre)"
+                        *ngFor="let ingre of listOfSelectedIngrediants">
+                        {{ingre}}
+                        <button matChipRemove >
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                     </mat-chip>
+                     
+                </mat-chip-set>
                 </div>
                 <div class="form-group">
                     <label for="Steps">Steps</label>
@@ -26,13 +41,12 @@
                 </div>
                 <div class="form-group">
                     <input type="file"  #Image accept="image/*" (change)="handelDileInput($any($event).target.files)" (change)="selecte=true">
+                    <img width="100" height="100" src="{{imageUrl}}">
                 </div>
-                <div *ngIf="selecte">
-                    <h2>selected</h2>
+                <div *ngIf="selecte">                    
                     <button type="submit" class="btn btn-primary" (click)="onSubmit(Image)">Save</button>
                 </div>
-                <div *ngIf="!selecte">
-                    <h2>not</h2>
+                <div *ngIf="!selecte">                   
                     <button type="submit" class="btn btn-primary" >Save</button>
                 </div>
             </form>
