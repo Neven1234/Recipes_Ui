@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import{ MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { EditDialogComponent } from './Components/RecipesComponent/edit-dialog/edit-dialog.component';
+import { SearchResultComponent } from './Components/RecipesComponent/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EditDialogComponent } from './Components/RecipesComponent/edit-dialog/e
     AddRecipeCompComponent,
     ViewRecipeComponent,
     EditDialogComponent,
+    SearchResultComponent,
     
   ],
   imports: [

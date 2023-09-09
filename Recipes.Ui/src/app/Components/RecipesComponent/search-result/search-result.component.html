@@ -1,8 +1,4 @@
-<div class="input-group">
-  <input type="search" [(ngModel)]="SearchInput" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-  <button type="button" class="btn btn-outline-primary" [routerLink]="['/Search/Result/',SearchInput]">search</button>
-</div>
-<div class="container" fxLayout="row wrap" fxLayoutGap="16px"  >
+<div class="container" fxLayout="row wrap" fxLayoutGap="16px" *ngIf="Recipes.length!=0" >
     <mat-card class="example-card" *ngFor="let recipe of Recipes"  style="background-color: rgb(165, 134, 22);" >
         <mat-card-header>
           <mat-card-title>{{ recipe.name }}</mat-card-title>
@@ -13,4 +9,7 @@
           <a [routerLink]="['/View',recipe.id]"><button class="btn btn-primary pull-right" style="background-color: black; color:white" > Details</button></a>
         </mat-card-actions>
       </mat-card>
+</div>
+<div *ngIf="Recipes.length ==0">
+    <h1>No result matching</h1>
 </div>

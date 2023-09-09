@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddRecipeCompComponent } from './Components/RecipesComponent/add-recipe-comp/add-recipe-comp.component';
 import { RecipesListComponent } from './Components/RecipesComponent/recipes-list/recipes-list.component';
 import { ViewRecipeComponent } from './Components/RecipesComponent/view-recipe/view-recipe.component';
+import { SearchResultComponent } from './Components/RecipesComponent/search-result/search-result.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     path:'View/:id',
     component:ViewRecipeComponent
   },
+  {
+    path:'Search/Result/:term',
+    component:SearchResultComponent
+  }
 ];
 
 @NgModule({

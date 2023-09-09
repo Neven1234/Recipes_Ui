@@ -52,4 +52,9 @@ export class RecipesService {
   const options = {responseType: 'text' as 'json'};
   return this.http.delete<Recipe>(this.basUrl+'/api/Recipe/'+id,options)
  }
+ //search
+ GetSearch(term:string):Observable<Recipe[]>
+ {
+  return this.http.get<Recipe[]>(this.basUrl+'/api/Recipe/search/'+term)
+ }
 }

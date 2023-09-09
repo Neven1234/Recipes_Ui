@@ -10,6 +10,7 @@ import { forEachChild } from 'typescript';
 export class RecipesListComponent {
   Recipes :Recipe[]=[
   ];
+  SearchInput:string=''
   constructor(private recipyServer:RecipesService){}
 
   ngOnInit(){
