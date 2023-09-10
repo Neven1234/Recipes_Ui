@@ -1,16 +1,60 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-    <div class="container">
-      <a class="navbar-brand" style="color: black">Recips For You</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link " style="color: black" href="Add">Add Recipe <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
+
+<mat-toolbar  style="background-color: rgb(199, 128, 23);">
+  <button mat-icon-button (click)="nav.toggle()"><mat-icon>menu</mat-icon></button>
+  <span>Recipes For You</span>
+  <div class=" col-6" style="margin-left: 500px;">
+    
+    <div class="input-group">
+
+      <input type="search" class="form-control rounded" placeholder="Search" [(ngModel)]="SearchInput" />
+        <button  mat-raised-button  style="background-color: rgb(125, 72, 11);" [routerLink]="['/Search/Result/',SearchInput]" >Search</button>
+      
     </div>
-  </nav>
+  </div>
+  
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-wrapper">
+  <mat-sidenav #nav>
+    <a href="">
+      <button mat-button>
+        <mat-icon>home</mat-icon>
+      </button>
+    </a>
+    <a >
+      <button mat-raised-button style="background-color: rgb(125, 72, 11);" [routerLink]="['Add']">
+        Add Recipe
+      </button>
+    </a>
+    <div class="form-group">
+      <div class=" col-6"></div>
+        <h4>filter</h4>
+        <select #ref (change)="getSelectedValue(ref.value)" (change)="convertTostring()" >
+          <option value=""></option>
+          <option *ngFor="let ingr of ingrediants" value="{{ingr.name}}">{{ ingr.name }}</option>
+        </select>
+      </div>
+      <div class=" col-6">
+        <div class="form-group">
+          <h3 for="Ing">Ingrediants</h3>
+          <mat-chip-set class="example-chip"
+              cdkDropList 
+              cdkDropListOrientation="horizontal"
+              (cdkDropListDropped)="drop($any($event))">
+              <mat-chip
+              class="example-box"
+              cdkDrag
+              (removed)="remove(ingre)"
+              *ngFor="let ingre of listOfIngredients">
+              {{ingre}}
+              <button matChipRemove >
+                  <mat-icon>cancel</mat-icon>
+              </button>
+           </mat-chip>
+          </mat-chip-set>
+          <button type="button" class="btn btn-outline-primary"  [routerLink]="['/SearchIngredie/Result/', SearchIngredient]" >Filter</button>
+        </div>
+      </div>
+  </mat-sidenav>
+  
+</mat-sidenav-container>
 <router-outlet></router-outlet>

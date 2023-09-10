@@ -4,6 +4,7 @@ import { AddRecipeCompComponent } from './Components/RecipesComponent/add-recipe
 import { RecipesListComponent } from './Components/RecipesComponent/recipes-list/recipes-list.component';
 import { ViewRecipeComponent } from './Components/RecipesComponent/view-recipe/view-recipe.component';
 import { SearchResultComponent } from './Components/RecipesComponent/search-result/search-result.component';
+import { SearchIngredientsComponent } from './Components/RecipesComponent/search-ingredients/search-ingredients.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'Search/Result/:term',
     component:SearchResultComponent
+  },
+  {
+    path:'SearchIngredie/Result/:ingredient',
+    component:SearchIngredientsComponent
   }
 ];
 

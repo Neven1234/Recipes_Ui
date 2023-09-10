@@ -1,0 +1,25 @@
+.sidenav-wrapper {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+
+  background: #ffffff;
+}
+mat-sidenav{
+  width: 150px;
+  padding: 0px;
+}
+
+
+input {
+    margin: 0px;
+    padding: 0px;
+    width: 30%;
+    outline: none;
+    height: 30px;
+    top:0px;
+    border-radius: 10px;
+}
+  

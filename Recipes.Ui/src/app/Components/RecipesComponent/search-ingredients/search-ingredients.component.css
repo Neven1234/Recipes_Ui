@@ -1,0 +1,9 @@
+.example-card {
+    max-width: 300px;
+    color: rgb(247, 240, 240);
+  }
+  
+.container{
+    padding: 10px;
+    display: flex;
+}

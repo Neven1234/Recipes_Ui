@@ -26,7 +26,6 @@ export class EditDialogComponent implements OnInit{
  ingrediants:Ingrediant[]=[]
  listOfIngredients:string[]=this.data.ingredients.split(',')
  public selectedvalue:string=''
- fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
  removable:true
  selectable:true
  addOnBlur:true

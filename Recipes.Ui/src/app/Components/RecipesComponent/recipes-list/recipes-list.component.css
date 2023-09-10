@@ -7,3 +7,69 @@
     padding: 10px;
     display: flex;
 }
+
+
+.row {
+	box-sizing: border-box;
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+	background: rgba(0,0,0,0.2);
+	padding: 10px;
+}
+
+.flexbox {
+	display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+
+
+.input{
+	box-sizing: border-box;
+    display: inline-block;
+    line-height: normal;
+    margin: 0 10px 0 0;
+    width: 190%;
+    padding: 10px 8px;
+	
+	font-size: 16px;
+    font-weight: 700;
+	line-height: 1;
+    text-transform: uppercase;
+}
+.buttonIn {
+    width: 300px;
+    position: relative;
+}
+  
+input {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    outline: none;
+    height: 30px;
+    border-radius: 5px;
+}
+  
+.b1 {
+    position: absolute;
+    top: 10;
+    border-radius: 5px;
+    right: 10px;
+    z-index: 2;
+    border: none;
+    top: 27px;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    background-color: #1e90ff;
+    transform: translateX(2px);
+}
+

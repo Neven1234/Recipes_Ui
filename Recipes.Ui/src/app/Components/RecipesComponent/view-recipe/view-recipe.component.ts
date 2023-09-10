@@ -43,15 +43,18 @@ export class ViewRecipeComponent {
   //delete
   deletRecipe(id:number)
   {
-    this.recipeService.DeletRecipe(id).subscribe({
-      next:(res)=>{
-        console.log('deleted')
-        alert('Deleted Successfully')
-        this.Router.navigate(['']);
-      },
-      error:(res)=>{
-        console.log('error is: '+res);
-      }
-    })
+    if(confirm("Are you Sure")){
+      this.recipeService.DeletRecipe(id).subscribe({
+        next:(res)=>{
+          console.log('deleted')
+          alert('Deleted Successfully')
+          this.Router.navigate(['']);
+        },
+        error:(res)=>{
+          console.log('error is: '+res);
+        }
+      })
+    }
+    
   }
 }

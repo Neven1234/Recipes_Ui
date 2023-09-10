@@ -21,6 +21,10 @@ import{ MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { EditDialogComponent } from './Components/RecipesComponent/edit-dialog/edit-dialog.component';
 import { SearchResultComponent } from './Components/RecipesComponent/search-result/search-result.component';
+import { SearchIngredientsComponent } from './Components/RecipesComponent/search-ingredients/search-ingredients.component';
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatSidenavModule } from '@angular/material/sidenav'
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { SearchResultComponent } from './Components/RecipesComponent/search-resu
     ViewRecipeComponent,
     EditDialogComponent,
     SearchResultComponent,
+    SearchIngredientsComponent,
     
   ],
   imports: [
@@ -47,6 +52,8 @@ import { SearchResultComponent } from './Components/RecipesComponent/search-resu
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
