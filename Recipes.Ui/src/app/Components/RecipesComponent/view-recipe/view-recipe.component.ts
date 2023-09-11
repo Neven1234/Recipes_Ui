@@ -35,8 +35,8 @@ export class ViewRecipeComponent {
   }
   openDialog(data:Recipe){
     this.editDialog.open(EditDialogComponent,{
-      width:'65%',
-      height:'500px',
+      width:'40%',
+      height:'529px',
       data,
     })
   }

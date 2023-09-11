@@ -6,6 +6,7 @@ import { Recipe } from 'src/app/Models/ReipeModel';
 import { RecipesService } from 'src/app/Service/recipes.service';
 
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
+import { FormControl,FormGroup,Validators } from '@angular/forms';
 @Component({
   selector: 'app-add-recipe-comp',
   templateUrl: './add-recipe-comp.component.html',
@@ -15,6 +16,7 @@ export class AddRecipeCompComponent {
   removable:true
  selectable:true
  addOnBlur:true
+ 
   recipe:Recipe={
     id:0,
     name:'',
@@ -116,5 +118,15 @@ export class AddRecipeCompComponent {
     }
   })
  }
+ ///validations
+ addNew=new FormGroup({
+  Name:new FormControl('',Validators.minLength(3)),
+  newIngrediant:new FormControl('',Validators.minLength(3)),
+  Steps:new FormControl('',Validators.minLength(1)),
+  Ingrediant:new FormControl('',Validators.minLength(1))
+ })
+ get Name(){return this.addNew.get('Name')}
+ get Steps(){return this.addNew.get('Steps')}
+ get Ingrediant(){return this.addNew.get('Ingrediant')}
 }
 

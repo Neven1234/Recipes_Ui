@@ -25,7 +25,7 @@ import { SearchIngredientsComponent } from './Components/RecipesComponent/search
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav'
 
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +53,8 @@ import { MatSidenavModule } from '@angular/material/sidenav'
     MatFormFieldModule,
     MatButtonModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

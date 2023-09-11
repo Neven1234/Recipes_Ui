@@ -1,61 +1,67 @@
 <div style="background-color: white;">
-    <h2 style="margin-right: 2%;"> hello</h2>
-    <div style="margin-right: 2%;">
-        <form #form="ngForm" (ngSubmit)=" editRecipe()" >
-            <div class="form-group">
-                <label for="Name">Name</label>
-                <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter recipe name" [(ngModel)]="recipe.name" >
-            </div>
-            <div class="form-group">
-                <label for="ingredient">Select the ingrediants</label>
-                <select #ref (change)="getSelectedValue(ref.value)">
-                    <option value=""></option>
-                   <option *ngFor="let ingr of ingrediants" value="{{ingr.name}}">{{ ingr.name }}</option>
-                </select>
-               
-            </div>
-            <div class="form-group">
-                <h3 for="Ing">Ingrediants</h3>
-                <mat-chip-set class="example-chip"
-                    cdkDropList 
-                    cdkDropListOrientation="horizontal"
-                    (cdkDropListDropped)="drop($any($event))">
-                    <mat-chip
-                        class="example-box"
-                        cdkDrag
-                        (removed)="remove(ingre)"
-                        *ngFor="let ingre of listOfIngredients">
-                        {{ingre}}
-                        <button matChipRemove >
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                     </mat-chip>
-                     
-                </mat-chip-set>
-            </div>
-            <div class="form-group">
-                <label for="Steps">Steps</label>
-                <input type="text" class="form-control" id="Steps" name="Steps" placeholder="Enter recipe Steps" [(ngModel)]="recipe.steps" >
-            </div>
-            <div class="form-group">
+    <div style="background-color: white; margin-left: 20px;">
+        <h2 style="margin-right: 2%;"> Edit form</h2>
+        <div style="margin-right: 2%;">
+            <form #form="ngForm" (ngSubmit)=" editRecipe()" >
                 <div class="form-group">
-                    <a (click)="removeImage()">
-                        <mat-icon>cancel</mat-icon>
-                    </a>
-                    <img  width="100" height="100" src="{{imageUrl}}">
-                   
-                    
-                    <input type="file"  #Image accept="image/*" (change)="handelDileInput($any($event).target.files)" (change)="selectedImage=true" >
+                    <label for="Name">Name</label>
+                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter recipe name" [(ngModel)]="recipe.name" >
                 </div>
-            </div>
-            <div *ngIf="selectedImage">                    
-                <button type="submit" class="btn btn-primary" (click)="onSubmit(Image)">Save</button>
-            </div>
-            <div *ngIf="!selectedImage">                   
-                <button type="submit" class="btn btn-primary" >Save</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="ingredient">Select the ingrediants</label>
+                    <select #ref (change)="getSelectedValue(ref.value)">
+                        <option value=""></option>
+                       <option *ngFor="let ingr of ingrediants" value="{{ingr.name}}">{{ ingr.name }}</option>
+                    </select>
+                   
+                </div>
+                <div class="form-group">
+                    <h3 for="Ing">Ingrediants</h3>
+                    <mat-chip-set class="example-chip"
+                        cdkDropList 
+                        cdkDropListOrientation="horizontal"
+                        (cdkDropListDropped)="drop($any($event))">
+                        <mat-chip
+                            class="example-box"
+                            cdkDrag
+                            (removed)="remove(ingre)"
+                            *ngFor="let ingre of listOfIngredients">
+                            {{ingre}}
+                            <button matChipRemove >
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                         </mat-chip>
+                         
+                    </mat-chip-set>
+                </div>
+                <div class="form-group">
+                    <label for="Steps">Steps</label>
+                    <textarea matInput class="form-control" id="Steps" name="Steps" placeholder="Enter recipe Steps" [(ngModel)]="recipe.steps"></textarea>
+                    
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <a (click)="removeImage()">
+                            <mat-icon>cancel</mat-icon>
+                        </a>
+                        <img  width="100" height="100" src="{{imageUrl}}">
+                       
+                        
+                        <input type="file"  #Image accept="image/*" (change)="handelDileInput($any($event).target.files)" (change)="selectedImage=true" >
+                    </div>
+                </div>
+                <div *ngIf="selectedImage">                    
+                    <button type="submit" class="b1" (click)="onSubmit(Image)" style="background-color: rgb(125, 72, 11);"mat-raised-button color="primary">Save</button>
+                    <button  matDialogClose class="b2" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary">Cancel</button>
+                </div>
+                <div *ngIf="!selectedImage">                   
+                    <button type="submit" class="b1" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary" >Save</button>
+                    <button  matDialogClose class="b2" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary">Cancel</button>
+                </div>
+            </form>
+        </div>
+        
     </div>
     
+    
 </div>
-
