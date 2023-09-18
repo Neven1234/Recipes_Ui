@@ -7,6 +7,7 @@ import { RecipesService } from 'src/app/Service/recipes.service';
 
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment.development';
 @Component({
   selector: 'app-add-recipe-comp',
   templateUrl: './add-recipe-comp.component.html',
@@ -16,7 +17,7 @@ export class AddRecipeCompComponent {
   removable:true
  selectable:true
  addOnBlur:true
- 
+ //imgUrl:string=environment.baseImageUrl;
   recipe:Recipe={
     id:0,
     name:'',
@@ -78,7 +79,7 @@ export class AddRecipeCompComponent {
   {
 
     if(this.fileToUpload!=null){
-      this.recipe.image="https://localhost:7206/Resourcess/images/"+this.fileToUpload.name;
+      this.recipe.image=environment.baseImageUrl+this.fileToUpload.name;
     }
     else{
       this.recipe.image=null

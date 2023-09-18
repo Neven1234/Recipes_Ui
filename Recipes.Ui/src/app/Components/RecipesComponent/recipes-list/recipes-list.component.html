@@ -7,7 +7,7 @@
         <img mat-card-image *ngIf="recipe.image==null" src="assets/img/default.jpg" alt="Photo of a Shiba Inu">
         <img mat-card-image *ngIf="recipe.image!=null" src={{recipe.image}} alt="Photo of a Shiba Inu">
         <mat-card-actions>
-          <a [routerLink]="['/View',recipe.id]"><button class="btn btn-primary pull-right" style="background-color: black; color:white" > Details</button></a>
+          <a  [routerLink]="['/View',recipe.id]"><button class="btn btn-primary pull-right" mat-raised-button style="background-color: rgb(125, 72, 11); margin-top: 10px;" > Details</button></a>
         </mat-card-actions>
       </mat-card>
 </div>

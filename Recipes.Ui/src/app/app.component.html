@@ -7,7 +7,7 @@
     <div class="input-group">
 
       <input type="search" class="form-control rounded" placeholder="Search" [(ngModel)]="SearchInput" />
-        <button  mat-raised-button  style="background-color: rgb(125, 72, 11);" [routerLink]="['/Search/Result/',SearchInput]" >Search</button>
+      <button  mat-raised-button  style="background-color: rgb(125, 72, 11); " [routerLink]="['/Search/Result/',SearchInput]" >Search</button>
       
     </div>
   </div>
@@ -16,15 +16,18 @@
 <mat-sidenav-container class="sidenav-wrapper">
   <mat-sidenav #nav>
     <a href="">
-      <button mat-button>
+      <button mat-button style="margin-top: 1px;margin-left: 10px;">
         <mat-icon>home</mat-icon>
       </button>
     </a>
-    <a >
-      <button mat-raised-button style="background-color: rgb(125, 72, 11);" [routerLink]="['Add']">
-        Add Recipe
-      </button>
-    </a>
+    <div style="margin-top: 15px;">
+      <a >
+        <button mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 20px;" [routerLink]="['Add']">
+          Add Recipe
+        </button>
+      </a>
+  </div>
+  <div style="margin-top: 15px; margin-left: 10px;">
     <div class="form-group">
       <div class=" col-6"></div>
         <h4>filter</h4>
@@ -51,9 +54,20 @@
               </button>
            </mat-chip>
           </mat-chip-set>
-          <button type="button" class="btn btn-outline-primary"  [routerLink]="['/SearchIngredie/Result/', SearchIngredient]" >Filter</button>
+          <button   mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 20px;"  [routerLink]="['/SearchIngredie/Result/', SearchIngredient]" >Filter</button>
         </div>
       </div>
+      <div style="margin-top: 350px; margin-left: 20px;" *ngIf="!isLogged">
+        <button mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 5px;" [routerLink]="['LogIn']">
+          LogIn
+        </button>
+      </div>
+      <div style="margin-top: 350px; margin-left: 20px;" *ngIf="isLogged">
+        <button mat-raised-button style="background-color: rgb(168, 53, 42); margin-left: 5px;" (click)="singOu()">
+          Sign Out
+        </button>
+      </div>
+    </div>
   </mat-sidenav>
   
 </mat-sidenav-container>

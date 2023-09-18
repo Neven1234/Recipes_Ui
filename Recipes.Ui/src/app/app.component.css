@@ -3,12 +3,12 @@
   top: 64px;
   bottom: 0;
   left: 0;
-  width: 150px;
+  width: 160px;
 
   background: #ffffff;
 }
 mat-sidenav{
-  width: 150px;
+  width: 160px;
   padding: 0px;
 }
 

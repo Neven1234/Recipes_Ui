@@ -5,6 +5,9 @@ import { RecipesListComponent } from './Components/RecipesComponent/recipes-list
 import { ViewRecipeComponent } from './Components/RecipesComponent/view-recipe/view-recipe.component';
 import { SearchResultComponent } from './Components/RecipesComponent/search-result/search-result.component';
 import { SearchIngredientsComponent } from './Components/RecipesComponent/search-ingredients/search-ingredients.component';
+import { LogInComponent } from './Components/log-in/log-in.component';
+import { RegisterFormComponent } from './Components/register-form/register-form.component';
+import { authGuard } from './gurds/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,11 +16,11 @@ const routes: Routes = [
   },
   {
     path:'Add',
-    component:AddRecipeCompComponent
+    component:AddRecipeCompComponent,canActivate:[authGuard]
   },
   {
     path:'View/:id',
-    component:ViewRecipeComponent
+    component:ViewRecipeComponent,canActivate:[authGuard]
   },
   {
     path:'Search/Result/:term',
@@ -26,7 +29,15 @@ const routes: Routes = [
   {
     path:'SearchIngredie/Result/:ingredient',
     component:SearchIngredientsComponent
-  }
+  },
+  {
+    path:'LogIn',
+    component:LogInComponent
+  },
+  {
+    path:'LogIn/Register',
+    component:RegisterFormComponent
+  },
 ];
 
 @NgModule({

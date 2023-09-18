@@ -26,6 +26,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav'
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { LogInComponent } from './Components/log-in/log-in.component';
+import { RegisterFormComponent } from './Components/register-form/register-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditDialogComponent,
     SearchResultComponent,
     SearchIngredientsComponent,
+    LogInComponent,
+    RegisterFormComponent,
     
   ],
   imports: [

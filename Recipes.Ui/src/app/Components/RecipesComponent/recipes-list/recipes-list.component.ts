@@ -5,6 +5,7 @@ import { Ingrediant } from 'src/app/Models/ingrediant';
 import { RecipesService } from 'src/app/Service/recipes.service';
 import { forEachChild } from 'typescript';
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
+import { UserService } from 'src/app/Service/user.service';
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
@@ -17,7 +18,7 @@ export class RecipesListComponent {
   listOfIngredients:string[]=[]
   SearchInput:string=''
   SearchIngredient:string=''
-  constructor(private recipyServer:RecipesService ){}
+  constructor(private recipyServer:RecipesService ,private usrser:UserService){}
 
   ngOnInit(){
     this.recipyServer.getAllRecipes().subscribe({
@@ -35,6 +36,8 @@ export class RecipesListComponent {
       }
     })
     
+    console.log('token is'+localStorage.getItem("token"));
+    console.log('token is'+this.usrser.IsLoggedin());
   }
 
   getSelectedValue(value:any){
