@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/userModel';
 import { UserService } from 'src/app/Service/user.service';
+import { FormControl,FormGroup,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-form',
@@ -14,7 +15,6 @@ export class RegisterFormComponent {
     id:0,
     username:'',
     password:'',
-    token:'',
     email:''
 
   }
@@ -30,5 +30,15 @@ export class RegisterFormComponent {
       }
     })
   }
+  ///validations
+  RegisterForm=new FormGroup({
+    UserName:new FormControl('',Validators.required),
+    Password:new FormControl('',Validators.required),
+    Email:new FormControl('',Validators.email)
+
+  })
+  get UserName(){return this.RegisterForm.get('UserName')}
+  get Password(){return this.RegisterForm.get('Password')}
+  get Email(){return this.RegisterForm.get('Email')}
 
 }

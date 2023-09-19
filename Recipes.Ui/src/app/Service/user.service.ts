@@ -17,6 +17,11 @@ export class UserService {
     return this.http.post<string>(this.basUrl+'/api/User/LogIn',user,options)
   }
 
+  logintest(user:User):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/User/LogIn',user,options)
+  }
+
   //register
   Register(user:User):Observable<User>{
     const options = {responseType: 'text' as 'json'};

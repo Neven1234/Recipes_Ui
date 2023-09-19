@@ -6,3 +6,6 @@
   .b2{
     margin-top: 20px;
   }
+  input.ng-invalid{
+    border-left: 5px solid red;
+}

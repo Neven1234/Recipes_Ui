@@ -4,6 +4,7 @@ import { User } from 'src/app/Models/userModel';
 import { RecipesService } from 'src/app/Service/recipes.service';
 import { UserService } from 'src/app/Service/user.service';
 import { AppComponent } from 'src/app/app.component';
+import { FormControl,FormGroup,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-log-in',
@@ -17,11 +18,12 @@ export class LogInComponent {
     id:0,
     username:'',
     password:'',
-    token:'',
     email:''
   }
+ 
   LogIn(){
-    this.services.Login(this.userLog).subscribe({
+    console.log(this.userLog.username+" "+this.userLog.password)
+    this.services.logintest(this.userLog).subscribe({
       next:(respons)=>{
         console.log('tokoko '+respons)
         
@@ -40,9 +42,17 @@ export class LogInComponent {
       },
       error:(res)=>{
         
-        console.log(res);
+        console.log(res.UserName);
       }
     })
   }
+
+  ///validations
+  LogInForm=new FormGroup({
+    UserName:new FormControl('',Validators.required),
+    Password:new FormControl('',Validators.required)
+  })
+  get UserName(){return this.LogInForm.get('UserName')}
+  get Password(){return this.LogInForm.get('Password')}
 
 }

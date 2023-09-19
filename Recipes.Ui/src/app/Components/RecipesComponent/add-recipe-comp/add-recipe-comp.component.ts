@@ -45,7 +45,7 @@ export class AddRecipeCompComponent {
   imageUrl:string='/assets/img/default.jpg'
   fileToUpload:any;
   selectedFile:File;
-  constructor(private recipeService:RecipesService, private Router:Router, private http:HttpClient){}
+  constructor(private recipeService:RecipesService, private Router:Router){}
   ngOnInit():void{
     this.recipeService.GetAllIngredients().subscribe({
       next:(res)=>{

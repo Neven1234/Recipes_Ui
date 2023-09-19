@@ -4,6 +4,7 @@ import { Recipe } from 'src/app/Models/ReipeModel';
 import { Ingrediant } from 'src/app/Models/ingrediant';
 import { RecipesService } from 'src/app/Service/recipes.service';
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
+import { FormControl,FormGroup,Validators } from '@angular/forms';
 export interface Fruit {
   name: string;
 }
@@ -106,4 +107,14 @@ export class EditDialogComponent implements OnInit{
   this.recipe.image=null
   this.imageUrl='assets/img/default.jpg'
  }
+ ///validations
+ Edite=new FormGroup({
+  Name:new FormControl('',Validators.minLength(3)),
+  newIngrediant:new FormControl('',Validators.minLength(3)),
+  Steps:new FormControl('',Validators.minLength(1)),
+  Ingrediant:new FormControl('',Validators.minLength(1))
+})
+get Name(){return this.Edite.get('Name')}
+get Steps(){return this.Edite.get('Steps')}
+get Ingrediant(){return this.Edite.get('Ingrediant')}
 }
