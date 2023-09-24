@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/Models/userModel';
 import { UserService } from 'src/app/Service/user.service';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
+import { AppComponent } from 'src/app/app.component';
+import { LogInComponent } from '../log-in/log-in.component';
 
 @Component({
   selector: 'app-register-form',

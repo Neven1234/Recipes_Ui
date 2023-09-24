@@ -3,6 +3,7 @@ import { RecipesService } from './Service/recipes.service';
 import { Ingrediant } from './Models/ingrediant';
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 import { UserService } from './Service/user.service';
+import { LogInComponent } from './Components/log-in/log-in.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +17,8 @@ export class AppComponent {
   SearchIngredient:string=''
   ingrediants:Ingrediant[]=[]
   listOfIngredients:string[]=[]
+  DateNow:Date;
+  expirationDate:Date;
   ngOnInit(){
     this.recipyServer.GetAllIngredients().subscribe({
       next:(res)=>{
@@ -24,6 +27,15 @@ export class AppComponent {
       }
     })
     this.isLogged=this.ureserver.IsLoggedin();
+    this.DateNow=new Date();
+    console.log("now date :"+ this.DateNow)
+    this.expirationDate=new Date(this.ureserver.getExpirationDate())
+    console.log('expirationdata stored :'+this.expirationDate)
+    if(this.expirationDate<this.DateNow)
+    {
+      this.singOu();
+    }
+    
   }
   //////
   getSelectedValue(value:any){
@@ -56,6 +68,7 @@ export class AppComponent {
     }
   }
   singOu(){
+    
     this.ureserver.logOut();
     this.isLogged=false;
   }

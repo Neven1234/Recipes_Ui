@@ -1,5 +1,5 @@
 <div class="container my-5">
-    <h1 class="mb-3"> Log in</h1>
+    <h1 class="mb-3"> Register</h1>
     <div class="row">
         <div class=" col-6">
             <form  [formGroup]="RegisterForm"  #form="ngForm" (ngSubmit)="register()" >
@@ -11,6 +11,21 @@
                 <div class="form-group">
                     <label for="Name">Password</label>
                     <input type="text" class="form-control" id="password" formControlName="Password" placeholder="Enter your Password" [(ngModel)]="userRegist.password">
+                    <span > password should contain 
+                        <div>
+                            a minimum of 1 lower case letter [a-z] and.
+                        </div>
+                        <div>
+                            a minimum of 1 upper case letter [A-Z] and.
+                        </div>
+                        <div>
+                            a minimum of 1 numeric character [0-9] and.
+                        </div>
+                        <div>
+                            a minimum of 1 special character: ~`!
+                        </div>
+                    </span>
+                      
                     <span *ngIf="Password.invalid"> Password is required</span>
                 </div>
                 <div class="form-group">

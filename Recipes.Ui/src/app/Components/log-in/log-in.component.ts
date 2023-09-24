@@ -6,6 +6,7 @@ import { UserService } from 'src/app/Service/user.service';
 import { AppComponent } from 'src/app/app.component';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -18,14 +19,16 @@ export class LogInComponent {
     id:0,
     username:'',
     password:'',
-    email:''
+    email:'null'
   }
+  Expiration:Date;
  
   LogIn(){
-    console.log(this.userLog.username+" "+this.userLog.password)
     this.services.logintest(this.userLog).subscribe({
       next:(respons)=>{
         console.log('tokoko '+respons)
+        var listt=respons.split(/[,:}]/);
+        console.log(listt);
         
         if(respons=='Username or Passwored are wrong')
         {
@@ -34,7 +37,12 @@ export class LogInComponent {
         }
         else{
           this.app.isLogged=true;
-          this.services.storeToken(respons);
+          var  temp = listt[3].substring(1, listt[3].length-1);
+          temp += ' 01:00';
+          this.services.StorExpirationDate(new Date(temp));
+          this.Expiration=new Date(temp);
+          console.log("exp: "+this.Expiration);
+          this.services.storeToken(listt[1]);
           alert('Login successfully');
           this.Router.navigate(['']);
         }
@@ -42,7 +50,7 @@ export class LogInComponent {
       },
       error:(res)=>{
         
-        console.log(res.UserName);
+        console.log(res);
       }
     })
   }

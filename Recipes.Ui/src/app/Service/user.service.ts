@@ -48,5 +48,11 @@ export class UserService {
   logOut(){
     localStorage.clear();
   }
+  StorExpirationDate(date:Date){
+    localStorage.setItem("ExpirationDate",date.toString())
+  }
+  getExpirationDate(){
+    return localStorage.getItem("ExpirationDate");
+  }
 
 }
