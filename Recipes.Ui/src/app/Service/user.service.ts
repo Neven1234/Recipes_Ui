@@ -54,5 +54,11 @@ export class UserService {
   getExpirationDate(){
     return localStorage.getItem("ExpirationDate");
   }
+  StoreUserName(username:string){
+    localStorage.setItem("UserName",username);
+  }
+  GetUserName(){
+    return localStorage.getItem("UserName")
+  }
 
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/Models/ReipeModel';
 import { RecipesService } from 'src/app/Service/recipes.service';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { UserService } from 'src/app/Service/user.service';
 
 @Component({
   selector: 'app-view-recipe',
@@ -11,14 +12,17 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent {
-  constructor(private route:ActivatedRoute ,private recipeService:RecipesService,private editDialog:MatDialog, private Router:Router){}
+  constructor(private route:ActivatedRoute ,private recipeService:RecipesService,private editDialog:MatDialog, private Router:Router,private userservice:UserService){}
   recipe:Recipe={
     id:0,
     name:'',
     ingredients:'',
     steps:'',
     image:'',
+    userName:''
   }
+  temp:string='';
+  authorized:boolean=false;
   ngOnInit():void{
     this.route.paramMap.subscribe({
       next:(params)=>{
@@ -27,11 +31,17 @@ export class ViewRecipeComponent {
           this.recipeService.getRecipe(id).subscribe({
             next:(res)=>{
               this.recipe=res
+              this.temp=this.userservice.GetUserName()
+              if(this.temp==this.recipe.userName)
+              {
+                this.authorized=true;
+              }
             }
           })
         }
       }
     })
+    
   }
   openDialog(data:Recipe){
     this.editDialog.open(EditDialogComponent,{
@@ -56,5 +66,8 @@ export class ViewRecipeComponent {
       })
     }
     
+  }
+  Notauthorized(){
+    alert("You are not authorized to edit this recipe ")
   }
 }

@@ -8,6 +8,8 @@ import { RecipesService } from 'src/app/Service/recipes.service';
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment.development';
+import { AppComponent } from 'src/app/app.component';
+import { UserService } from 'src/app/Service/user.service';
 @Component({
   selector: 'app-add-recipe-comp',
   templateUrl: './add-recipe-comp.component.html',
@@ -24,6 +26,7 @@ export class AddRecipeCompComponent {
     ingredients:'',
     steps:'',
     image:'',
+    userName:''
   }
   NewIngrediant:Ingrediant={
     id:0,
@@ -44,8 +47,9 @@ export class AddRecipeCompComponent {
   selecte:boolean=false; 
   imageUrl:string='/assets/img/default.jpg'
   fileToUpload:any;
+  username:string;
   selectedFile:File;
-  constructor(private recipeService:RecipesService, private Router:Router){}
+  constructor(private recipeService:RecipesService,private userservice:UserService, private Router:Router){}
   ngOnInit():void{
     this.recipeService.GetAllIngredients().subscribe({
       next:(res)=>{
@@ -77,7 +81,7 @@ export class AddRecipeCompComponent {
   
   addRecipe()
   {
-
+    this.username=this.userservice.GetUserName();
     if(this.fileToUpload!=null){
       this.recipe.image=environment.baseImageUrl+this.fileToUpload.name;
     }
@@ -87,7 +91,7 @@ export class AddRecipeCompComponent {
     
     console.log("haa: "+this.recipe.image)
     this.recipe.ingredients=this.listOfSelectedIngrediants.toString()
-    this.recipeService.addREcipe(this.recipe)
+    this.recipeService.addREcipe(this.recipe,this.username)
     .subscribe({
       next:(_addedTask)=>{
         console.log('tm')

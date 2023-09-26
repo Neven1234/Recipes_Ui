@@ -23,6 +23,7 @@ export class EditDialogComponent implements OnInit{
   ingredients:'',
   steps:'',
   image:'',
+  userName:''
 }
  ingrediants:Ingrediant[]=[]
  listOfIngredients:string[]=this.data.ingredients.split(',')

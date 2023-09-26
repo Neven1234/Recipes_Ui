@@ -35,10 +35,10 @@ export class RecipesService {
   getAllRecipes():Observable<Recipe[]>{
     return this.http.get<Recipe[]>(this.basUrl+'/api/Recipe')
   }
-  addREcipe(addRequest:Recipe):Observable<Recipe>{
+  addREcipe(addRequest:Recipe,username:string):Observable<Recipe>{
     addRequest.id=0;
     const options = {responseType: 'text' as 'json'};
-    return this.http.post<Recipe>(this.basUrl +'/api/Recipe',addRequest,options);
+    return this.http.post<Recipe>(this.basUrl +'/api/Recipe/Add/'+username,addRequest,options);
   }
   getRecipe(id:number):Observable<Recipe>{
     return this.http.get<Recipe>(this.basUrl+'/api/Recipe/'+id)

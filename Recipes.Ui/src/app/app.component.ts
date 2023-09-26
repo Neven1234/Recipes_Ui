@@ -18,6 +18,7 @@ export class AppComponent {
   ingrediants:Ingrediant[]=[]
   listOfIngredients:string[]=[]
   DateNow:Date;
+  userName:string;
   expirationDate:Date;
   ngOnInit(){
     this.recipyServer.GetAllIngredients().subscribe({

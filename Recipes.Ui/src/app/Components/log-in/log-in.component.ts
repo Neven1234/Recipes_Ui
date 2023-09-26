@@ -26,6 +26,7 @@ export class LogInComponent {
   LogIn(){
     this.services.logintest(this.userLog).subscribe({
       next:(respons)=>{
+        this.services.StoreUserName(this.userLog.username);
         console.log('tokoko '+respons)
         var listt=respons.split(/[,:}]/);
         console.log(listt);
