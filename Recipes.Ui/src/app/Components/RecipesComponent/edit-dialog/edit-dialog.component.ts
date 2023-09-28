@@ -79,6 +79,7 @@ export class EditDialogComponent implements OnInit{
     this.recipeService.EditRecipe(this.data.id,this.recipe).subscribe({
       next:(res)=>{
         console.log('path el sora ba3d el submit :'+this.recipe.image)
+        this.ngOnInit();
         alert('Edited succssesfuly')
       },
       error:(res)=>{
@@ -108,6 +109,9 @@ export class EditDialogComponent implements OnInit{
   this.recipe.image=null
   this.imageUrl='assets/img/default.jpg'
  }
+ refrash(){
+  window.location.reload()
+}
  ///validations
  Edite=new FormGroup({
   Name:new FormControl('',Validators.minLength(3)),

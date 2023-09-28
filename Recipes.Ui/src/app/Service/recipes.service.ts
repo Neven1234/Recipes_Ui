@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Ingrediant } from '../Models/ingrediant';
 import { Recipe } from '../Models/ReipeModel';
+import { RateReview } from '../Models/RateAndReview';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +62,17 @@ export class RecipesService {
  //search buy ingredient
  GetRecipeBuyIngredients(ingredient:string):Observable<Recipe[]>{
   return this.http.get<Recipe[]>(this.basUrl+'/api/Recipe/searchIng/'+ingredient)
+ }
+
+ //Rate and Review
+
+ AddRateAndReview(rateAndReview:RateReview,recipeId:number):Observable<RateReview>{
+  rateAndReview.id=0;
+  const options = {responseType: 'text' as 'json'};
+  return this.http.post<RateReview>(this.basUrl+'/api/Rating/Rating/'+recipeId ,rateAndReview,options)
+ }
+ GetReviews(recipeID:number):Observable<RateReview[]>
+ {
+  return this.http.get<RateReview[]>(this.basUrl+'/api/Rating/'+recipeID)
  }
 }
