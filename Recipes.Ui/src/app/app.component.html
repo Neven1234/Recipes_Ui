@@ -21,6 +21,13 @@
       </button>
     </a>
     <div style="margin-top: 15px;">
+      <a  [routerLink]="['Profile']">
+        <button mat-raised-button style=" margin-left: 10px;">
+          <mat-icon>account_box</mat-icon>
+        </button>
+      </a>
+  </div>
+    <div style="margin-top: 15px;">
       <a >
         <button mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 20px;" [routerLink]="['Add']">
           Add Recipe
@@ -57,12 +64,12 @@
           <button   mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 20px;"  [routerLink]="['/SearchIngredie/Result/', SearchIngredient]" >Filter</button>
         </div>
       </div>
-      <div style="margin-top: 350px; margin-left: 20px;" *ngIf="!isLogged">
+      <div style="margin-top: 200px; margin-left: 20px;" *ngIf="!isLogged">
         <button mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 5px;" [routerLink]="['LogIn']">
           LogIn
         </button>
       </div>
-      <div style="margin-top: 350px; margin-left: 20px;" *ngIf="isLogged">
+      <div style="margin-top: 200px; margin-left: 20px;" *ngIf="isLogged">
         <button mat-raised-button style="background-color: rgb(168, 53, 42); margin-left: 5px;" (click)="singOu()">
           Sign Out
         </button>

@@ -1,0 +1,41 @@
+<div style="margin-left: 180px; margin-top: 25px;" >
+    <div [formGroup]="settings">
+        <label>Username</label>
+        <input style="margin-left: 20px;" type="text" formControlName="UserName" [(ngModel)]="user.userName">
+        <span *ngIf="UserName.invalid"> Username is required</span>
+    
+        <div style="margin-top: 40px;">
+            <label>Email</label>
+            <input style="margin-left: 47px;" type="text" formControlName="Email" [(ngModel)]="user.email">
+            <span *ngIf="Email.invalid"> Not in email form </span>    
+        </div>
+        <div style="margin-top: 40px;">
+            <button mat-raised-button style="background-color: rgb(125, 72, 11);" (click)="UpdateUserNameOrEmail()">Save Changes</button>
+        </div>
+        <div style="margin-top: 50px;">
+            <button mat-raised-button style="background-color: rgb(125, 72, 11);" (click)="changePassswordClicked()">Cange Password</button>
+        </div>
+    </div>
+   
+    <div *ngIf="clicked" style="margin-top: 40px;"  [formGroup]="changePassworedd">
+        <div >
+            <label>Current Password</label>
+            <input style="margin-left: 47px;" type="text" formControlName="oldpassword" [(ngModel)]="ChangePass.oldPasswored">
+        </div>
+        <div style="margin-top: 40px;">
+            <label>New Password</label>
+            <input style="margin-left: 65px;" type="text" formControlName="newpassword" [(ngModel)]="ChangePass.newPasswored">
+        </div>
+        <div style="margin-top: 40px;">
+            <label>Confirm Password</label>
+            <input style="margin-left: 47px;" type="text" formControlName="confirmpassword" [(ngModel)]="ChangePass.confirmPasswored">
+        </div>
+        <div style="margin-top: 40px;">
+            <button (click)="ForgetPasswored()" >Forget Password</button>
+        </div>
+        <div style="margin-top: 40px;">
+            <button mat-raised-button style="background-color: rgb(125, 72, 11); color: white;"(click)="changePassword()">Save Changes</button>
+        </div>
+    </div>
+    
+</div>

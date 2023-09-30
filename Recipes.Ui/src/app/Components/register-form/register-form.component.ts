@@ -15,7 +15,7 @@ export class RegisterFormComponent {
   constructor(private services:UserService,private Router:Router){}
   userRegist:User={
     id:0,
-    username:'',
+    userName:'',
     password:'',
     email:''
 

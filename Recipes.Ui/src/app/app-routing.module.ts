@@ -8,6 +8,9 @@ import { SearchIngredientsComponent } from './Components/RecipesComponent/search
 import { LogInComponent } from './Components/log-in/log-in.component';
 import { RegisterFormComponent } from './Components/register-form/register-form.component';
 import { authGuard } from './gurds/auth.guard';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { UserSettingsComponent } from './Components/user-settings/user-settings.component';
+import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 
 const routes: Routes = [
   {
@@ -37,6 +40,18 @@ const routes: Routes = [
   {
     path:'LogIn/Register',
     component:RegisterFormComponent
+  },
+  {
+    path:'Profile',
+    component:UserProfileComponent,canActivate:[authGuard]
+  },
+  {
+    path:'Profile/Settings',
+    component:UserSettingsComponent
+  },
+  {
+    path:'FogetPassword',
+    component:ForgetPasswordComponent
   },
 ];
 

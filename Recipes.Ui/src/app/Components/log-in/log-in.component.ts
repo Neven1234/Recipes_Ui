@@ -17,23 +17,30 @@ export class LogInComponent {
    
   userLog:User={
     id:0,
-    username:'',
+    userName:'',
     password:'',
     email:'null'
   }
   Expiration:Date;
- 
+ userId(){
+  this.services.GetUserId(this.userLog.userName).subscribe({
+    next:(res)=>{
+      console.log('el Id '+res)
+      this.services.StoreUserId(res);
+    }
+  })
+ }
   LogIn(){
     this.services.logintest(this.userLog).subscribe({
       next:(respons)=>{
-        this.services.StoreUserName(this.userLog.username);
+        this.services.StoreUserName(this.userLog.userName);
         console.log('tokoko '+respons)
         var listt=respons.split(/[,:}]/);
         console.log(listt);
-        
-        if(respons=='Username or Passwored are wrong')
+       
+        if(respons=='Username or Passwored are wrong'|| respons=='Please conferm your email')
         {
-          alert('Username or Passwored are wrong');
+          alert(respons);
           
         }
         else{
@@ -55,6 +62,20 @@ export class LogInComponent {
       }
     })
   }
+
+  ForgetPasswored(){
+    this.Router.navigate(['FogetPassword'])
+    this.services.ForgetPassword(this.userLog.userName).subscribe({
+      next:(respose)=>{
+        alert(respose)
+        console.log(respose)
+      },
+      error:(error)=>{
+        alert("email has been sent to you")
+        console.log(error);
+      }
+    })
+   }
 
   ///validations
   LogInForm=new FormGroup({

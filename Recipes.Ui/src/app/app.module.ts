@@ -28,6 +28,9 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogInComponent } from './Components/log-in/log-in.component';
 import { RegisterFormComponent } from './Components/register-form/register-form.component';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { UserSettingsComponent } from './Components/user-settings/user-settings.component';
+import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,9 @@ import { RegisterFormComponent } from './Components/register-form/register-form.
     SearchIngredientsComponent,
     LogInComponent,
     RegisterFormComponent,
+    UserProfileComponent,
+    UserSettingsComponent,
+    ForgetPasswordComponent,
     
   ],
   imports: [

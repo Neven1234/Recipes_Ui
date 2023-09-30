@@ -1,8 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../Models/userModel';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { changePassword } from '../Models/ChangePassword';
+import { resetPassword } from '../Models/ResetPassword';
+import { StringLiteral } from 'typescript';
+import { Recipe } from '../Models/ReipeModel';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +67,50 @@ export class UserService {
   GetUserName(){
     return localStorage.getItem("UserName")
   }
+  //Get user
+  GetUser(username:string):Observable<User>
+  {
+    return this.http.get<User>(this.basUrl+'/api/User/GetUser/'+username)
+  }
+  //get user id
+  GetUserId( username:string):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.get<string>(this.basUrl+'/api/User/GetUserId/'+username,options)
+  }
+  //get user recipes
+  GetUserRecipes(username:string):Observable<Recipe[]>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.get<Recipe[]>(this.basUrl+'/api/Recipe/userRecipes/'+username)
+  }
 
+  StoreUserId(Id:string){
+    localStorage.setItem("UserId",Id);
+  }
+  GetUserIdFormSorage(){
+    return localStorage.getItem("UserId");
+  }
+
+  //UpdateUSer
+  UpdateData(user:User,username:string):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.put<string>(this.basUrl+'/api/User/Update/'+username,user,options)
+    
+  }
+  //change password
+  ChangePassword(passwordRequest:changePassword,username: string):Observable<string>
+  {
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/User/ChangePassword/'+username,passwordRequest,options)
+  }
+  //Forget password
+  ForgetPassword( username:string ):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/User/ForgetPassword/'+username,options)
+  }
+
+  ResetPasswored(resetReq:resetPassword,username:string):Observable<string>
+  {
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/User/reset-password/'+username,resetReq,options)
+  }
 }

@@ -45,7 +45,7 @@ export class ViewRecipeComponent {
           this.recipeService.getRecipe(id).subscribe({
             next:(res)=>{
               this.recipe=res
-              this.temp=this.userservice.GetUserName()
+              this.temp=this.userservice.GetUserIdFormSorage()
               this.rate.userId=this.temp;
               if(this.temp==this.recipe.userName)
               {
