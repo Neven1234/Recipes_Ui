@@ -4,13 +4,14 @@ import { Ingrediant } from './Models/ingrediant';
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 import { UserService } from './Service/user.service';
 import { LogInComponent } from './Components/log-in/log-in.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private recipyServer:RecipesService ,private ureserver:UserService){}
+  constructor(private recipyServer:RecipesService ,private ureserver:UserService,private router:Router){}
   title = 'Recipes.Ui';
   isLogged:boolean=false;
   SearchInput:string=''
@@ -72,5 +73,6 @@ export class AppComponent {
     
     this.ureserver.logOut();
     this.isLogged=false;
+    this.router.navigate([''])
   }
 }

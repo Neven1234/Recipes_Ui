@@ -59,8 +59,13 @@ export class UserSettingsComponent {
  changePassword(){
   this.userService.ChangePassword(this.ChangePass,this.usernam).subscribe({
     next:(response)=>{
+      
       alert(response)
-      this.Router.navigate(['Profile']);
+      if(response=='Password changeed successfully')
+      {
+        this.Router.navigate(['Profile']);
+      }
+     
     },
     error:(error)=>{
       console.log(error)

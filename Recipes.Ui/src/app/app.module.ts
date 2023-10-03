@@ -31,6 +31,7 @@ import { RegisterFormComponent } from './Components/register-form/register-form.
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { UserSettingsComponent } from './Components/user-settings/user-settings.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { ForgetPasswordComponent } from './Components/forget-password/forget-pas
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

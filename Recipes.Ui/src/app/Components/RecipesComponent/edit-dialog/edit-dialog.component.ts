@@ -5,6 +5,7 @@ import { Ingrediant } from 'src/app/Models/ingrediant';
 import { RecipesService } from 'src/app/Service/recipes.service';
 import {CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
+import { Category } from 'src/app/Models/Categories';
 export interface Fruit {
   name: string;
 }
@@ -23,10 +24,13 @@ export class EditDialogComponent implements OnInit{
   ingredients:'',
   steps:'',
   image:'',
-  userName:''
+  userName:'',
+  category:''
 }
  ingrediants:Ingrediant[]=[]
  listOfIngredients:string[]=this.data.ingredients.split(',')
+ Categories:Category[]=[]
+ selectedCategory:string;
  public selectedvalue:string=''
  removable:true
  selectable:true
@@ -43,7 +47,13 @@ export class EditDialogComponent implements OnInit{
    }
    
  }
-
+ getSelectedCategory(value:any){
+  
+  
+ this.selectedCategory=value
+ this.recipe.category=value
+  console.log("the fvlue yam"+value);
+}
 
  drop(event: CdkDragDrop<string[]>) {
   moveItemInArray(this.listOfIngredients, event.previousIndex, event.currentIndex);
@@ -68,6 +78,13 @@ export class EditDialogComponent implements OnInit{
         console.log(this.ingrediants)
       }
     })
+    this.recipeService.GetAllCategories().subscribe({
+      next:(response)=>{
+        console.log(response)
+        this.Categories=response
+      }
+    })
+
   }
 
   editRecipe(){
@@ -76,10 +93,11 @@ export class EditDialogComponent implements OnInit{
     {
       this.recipe.image="https://localhost:7206/Resourcess/images/"+this.fileToUpload.name;
     }
+    this.recipe.category=this.selectedCategory;
     this.recipeService.EditRecipe(this.data.id,this.recipe).subscribe({
       next:(res)=>{
         console.log('path el sora ba3d el submit :'+this.recipe.image)
-        this.ngOnInit();
+        console.log(res)
         alert('Edited succssesfuly')
       },
       error:(res)=>{
@@ -117,9 +135,9 @@ export class EditDialogComponent implements OnInit{
   Name:new FormControl('',Validators.minLength(3)),
   newIngrediant:new FormControl('',Validators.minLength(3)),
   Steps:new FormControl('',Validators.minLength(1)),
-  Ingrediant:new FormControl('',Validators.minLength(1))
+  Category:new FormControl('',Validators.required) 
 })
 get Name(){return this.Edite.get('Name')}
 get Steps(){return this.Edite.get('Steps')}
-get Ingrediant(){return this.Edite.get('Ingrediant')}
+get Category(){return this.Edite.get('Category')}
 }

@@ -9,11 +9,18 @@
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
+      Category :-
+     </mat-card-content>
+     <mat-card-content>
+      {{recipe.category}} 
+     </mat-card-content>
+    <mat-card-content>
      Ingredients:-
     </mat-card-content>
     <mat-card-content>
      {{recipe.ingredients}}
     </mat-card-content>
+    
     <mat-card-content>
      Steps :-
     </mat-card-content>
@@ -29,20 +36,30 @@
       <button (click)="Notauthorized()" mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" class="b1">Edit</button>
       <button (click)="Notauthorized()" mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" class="b2">Delete</button>
     </div>
-    <div>
-      <mat-icon *ngFor="let star of maxRatingArray ;let index=index" (mouseenter)="handelEnter(index)"
+    <div [formGroup]="Review">
+      <mat-icon *ngFor="let star of maxRatingArray ;let index=index" (mouseenter)="handelEnter(index)" 
       (mouseleave)="handelLeave()"
       (click)="Rating(index)"
       [ngClass]="{checked:selectStar>index}">
         star</mat-icon>
         <label >Enter your review</label>
-        <input type="text" [(ngModel)]="rate.review">
-     
+        <input type="text" [(ngModel)]="rate.review" formControlName="review">
+        <span *ngIf="review.invalid"> Review is required </span> 
     </div>
     <div>
       <button mat-raised-button color="primary" style="background-color: rgb(125, 72, 11); margin-left: 20px;" (click)=" send()"   >Send</button>
     </div>
     <div class="model"></div>
+    <div *ngIf="!AddedToFavorite">
+      <button mat-raised-button style="margin-top:25px;   margin-left: 20px;" (click)=" AddToFavorite()" >
+        <mat-icon >favorite</mat-icon>
+      </button>
+    </div>
+    <div  *ngIf="AddedToFavorite"> 
+      <button mat-raised-button style="margin-top:25px;   margin-left: 20px;" (click)="  RemoveFromFavorite()" >
+        <mat-icon color="warn" >favorite</mat-icon>
+      </button>
+    </div>
   </mat-card>
   <mat-card class="example-card" style="margin-left: 160px;">
     <mat-card-header>

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Ingrediant } from '../Models/ingrediant';
 import { Recipe } from '../Models/ReipeModel';
 import { RateReview } from '../Models/RateAndReview';
+import { Category } from '../Models/Categories';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class RecipesService {
   addedIngredient.id=0;
   const options = {responseType: 'text' as 'json'};
   return this.http.post<Ingrediant>(this.basUrl+'/api/Ingredients',addedIngredient,options);
+ }
+ //Category
+ GetAllCategories():Observable<Category[]>{
+  return this.http.get<Category[]>(this.basUrl+'/api/Ingredients/Category')
  }
  
  //image

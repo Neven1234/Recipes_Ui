@@ -47,11 +47,11 @@ const routes: Routes = [
   },
   {
     path:'Profile/Settings',
-    component:UserSettingsComponent
+    component:UserSettingsComponent,canActivate:[authGuard]
   },
   {
     path:'FogetPassword',
-    component:ForgetPasswordComponent
+    component:ForgetPasswordComponent,canActivate:[authGuard]
   },
 ];
 

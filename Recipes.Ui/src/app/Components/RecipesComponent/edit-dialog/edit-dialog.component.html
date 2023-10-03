@@ -10,7 +10,7 @@
                 </div>
                 <div class="form-group">
                     <label for="ingredient">Select the ingrediants</label>
-                    <select #ref (change)="getSelectedValue(ref.value)" formControlName="Ingrediant">
+                    <select #ref (change)="getSelectedValue(ref.value)" >
                         <option value=""></option>
                        <option *ngFor="let ingr of ingrediants" value="{{ingr.name}}">{{ ingr.name }}</option>
                     </select>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <h3 for="Ing">Ingrediants</h3>
-                    <mat-chip-set class="example-chip"
+                    <mat-chip-set class="example-chip" 
                         cdkDropList 
                         cdkDropListOrientation="horizontal"
                         (cdkDropListDropped)="drop($any($event))">
@@ -32,9 +32,21 @@
                                 <mat-icon>cancel</mat-icon>
                             </button>
                          </mat-chip>
-                         
                     </mat-chip-set>
                 </div>
+            <div class="form-group">
+                <label for="ingredient">Select the Category</label>
+                <select #reff (change)="getSelectedCategory(reff.value)"formControlName="Ingrediant" [(ngModel)]="recipe.category">
+                    <option value=""></option>
+                   <option *ngFor="let category of Categories" value="{{category.category}}">{{ category.category }}</option>
+                   
+                </select>
+            </div>
+            <div>
+                <label>Category</label>
+                <input type="tel"  formControlName="Category" [(ngModel)]="recipe.category" readonly >
+                <span *ngIf="Category.invalid"> Category is required </span>
+            </div>
                 <div class="form-group">
                     <label for="Steps">Steps</label>
                     <textarea matInput class="form-control" id="Steps" formControlName="Steps" placeholder="Enter recipe Steps" [(ngModel)]="recipe.steps"></textarea>
@@ -56,7 +68,7 @@
                     <button  matDialogClose class="b2" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary">Cancel</button>
                 </div>
                 <div *ngIf="!selectedImage">                   
-                    <button type="submit" class="b1" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary" >Save</button>
+                    <button type="submit" class="b1" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary" (click)="refrash()" >Save</button>
                     <button  matDialogClose class="b2" style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary" (click)="refrash()">Cancel</button>
                 </div>
             </form>

@@ -6,6 +6,8 @@ import { RecipesService } from 'src/app/Service/recipes.service';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { UserService } from 'src/app/Service/user.service';
 import { RateReview } from 'src/app/Models/RateAndReview';
+import { FormControl,FormGroup,Validators } from '@angular/forms';
+import { Favorite } from 'src/app/Models/Favorites';
 
 @Component({
   selector: 'app-view-recipe',
@@ -20,13 +22,23 @@ export class ViewRecipeComponent {
     ingredients:'',
     steps:'',
     image:'',
-    userName:''
+    userName:'',
+    category:''
   }
   @Input() maxRating=5;
   @Input() selectStar=0;
   priviaseSelection:number=0;
   maxRatingArray:any[]=[]
   reviews:RateReview[]=[]
+  Favo:Favorite[]=[]
+  recipeFavId:number
+  username:string=this.userservice.GetUserName();
+  favorite:Favorite={
+    id:0,
+    userId:'',
+    recipeId:0
+  }
+  AddedToFavorite:boolean=false;
   seeReviewClicked:boolean=false;
   rate:RateReview={
     id:0,
@@ -59,7 +71,18 @@ export class ViewRecipeComponent {
       
     })
     this.maxRatingArray=Array(this.maxRating).fill(0);
-    
+    this.userservice.GetFavoriteRecipsId(this.username).subscribe({
+      next:(response)=>{
+        this.Favo=response
+        this.Favo.forEach(Element=>{
+          if(Element.recipeId==this.recipe.id)
+          {
+            this.AddedToFavorite=true
+            this.recipeFavId=Element.id
+          }
+        })
+      }
+    })
   }
   openDialog(data:Recipe){
     this.editDialog.open(EditDialogComponent,{
@@ -115,6 +138,7 @@ export class ViewRecipeComponent {
     this.recipeService.AddRateAndReview(this.rate,this.recipe.id).subscribe({
       next:(res)=>{
         console.log(res)
+        alert('Review submitted  successfully');
       },
       error:(err)=>{
         console.log('error is: '+err)
@@ -135,7 +159,43 @@ export class ViewRecipeComponent {
       }
     })
   }
+  AddToFavorite(){
+    if(this.AddedToFavorite==false)
+    {
+      this.AddedToFavorite=true
+      this.favorite.recipeId=this.recipe.id
+      
+      this.userservice.AddFavoriet(this.favorite,this.username).subscribe({
+        next:(response)=>{
+          console.log("el respons el fady"+response)
+            this.favorite=response
+            this.recipeFavId=response.id
+            alert("Added to favorite")
+        },
+        error:(response)=>{
+          console.log(response)
+        }
+      })
+    }
+   
+  }
+  RemoveFromFavorite()
+  {
+    this.AddedToFavorite=false;
+    this.userservice.RemoveFromFavorite( this.recipeFavId).subscribe({
+      next:(res)=>{
+        alert("removed from favorite");
+      }
+    })
+  }
   refrash(){
     window.location.reload()
   }
+  ///validations
+  Review=new FormGroup({
+    review:new FormControl('',Validators.required)
+
+  })
+  get review(){return this.Review.get('review')}
+
 }

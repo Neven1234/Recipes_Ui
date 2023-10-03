@@ -14,6 +14,7 @@ import { UserService } from 'src/app/Service/user.service';
 export class RecipesListComponent {
   Recipes :Recipe[]=[
   ];
+  loading:boolean=true
   ingrediants:Ingrediant[]=[]
   listOfIngredients:string[]=[]
   SearchInput:string=''
@@ -21,8 +22,10 @@ export class RecipesListComponent {
   constructor(private recipyServer:RecipesService ,private usrser:UserService){}
 
   ngOnInit(){
+   
     this.recipyServer.getAllRecipes().subscribe({
       next:(recipes)=>{
+        this.loading=false
         this.Recipes=recipes;
       },
       error:(respons)=>{

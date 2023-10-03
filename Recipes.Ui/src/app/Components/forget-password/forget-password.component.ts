@@ -23,8 +23,15 @@ resetPassworedd(){
   this.userservice.ResetPasswored(this.restPass,this.username).subscribe({
     next:(response)=>{
       console.log(response)
-      alert(response)
-      this.Router.navigate(['Profile']);
+      if(response=='the password don match the confirm password')
+      {
+        alert(response)
+      }
+      else{
+        alert(response)
+        this.Router.navigate(['Profile']);
+      }
+     
     }
   })
 }

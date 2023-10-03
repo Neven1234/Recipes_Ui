@@ -38,7 +38,7 @@ export class LogInComponent {
         var listt=respons.split(/[,:}]/);
         console.log(listt);
        
-        if(respons=='Username or Passwored are wrong'|| respons=='Please conferm your email')
+        if(respons=='Username or Passwored are wrong'|| respons=='Please conferm your email by click the linke we sent it to you')
         {
           alert(respons);
           

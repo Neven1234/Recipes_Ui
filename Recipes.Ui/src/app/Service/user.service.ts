@@ -8,6 +8,7 @@ import { changePassword } from '../Models/ChangePassword';
 import { resetPassword } from '../Models/ResetPassword';
 import { StringLiteral } from 'typescript';
 import { Recipe } from '../Models/ReipeModel';
+import { Favorite } from '../Models/Favorites';
 
 
 
@@ -112,5 +113,19 @@ export class UserService {
   {
     const options = {responseType: 'text' as 'json'};
     return this.http.post<string>(this.basUrl+'/api/User/reset-password/'+username,resetReq,options)
+  }
+  //Favorites
+  AddFavoriet(favorite:Favorite,username:string):Observable<Favorite>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<Favorite>(this.basUrl+'/api/Favorites/Add/'+username,favorite,options)
+  }
+  GetFavoriteRecipsId(username:string):Observable<Favorite[]>
+  {
+    const options = {responseType: 'text' as 'json'};
+    return this.http.get<Favorite[]>(this.basUrl+'/api/Favorites/Gett/'+username)
+  }
+  RemoveFromFavorite(Id:number):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.delete<string>(this.basUrl+'/api/Favorites/'+Id,options)
   }
 }

@@ -5,5 +5,6 @@ export interface Recipe{
     steps:string;
     image:string;
     userName:string;
+    category:string
 
 }

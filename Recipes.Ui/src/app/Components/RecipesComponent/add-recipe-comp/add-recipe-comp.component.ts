@@ -10,6 +10,7 @@ import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment.development';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/Service/user.service';
+import { Category } from 'src/app/Models/Categories';
 @Component({
   selector: 'app-add-recipe-comp',
   templateUrl: './add-recipe-comp.component.html',
@@ -26,17 +27,22 @@ export class AddRecipeCompComponent {
     ingredients:'',
     steps:'',
     image:'',
-    userName:''
+    userName:'',
+    category:''
   }
   NewIngrediant:Ingrediant={
     id:0,
     name:''
   }
   ingrediants:Ingrediant[]=[]
+  Categories:Category[]=[]
+  selectedCategory:string;
+
   listOfSelectedIngrediants:string[]=[]
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.listOfSelectedIngrediants, event.previousIndex, event.currentIndex);
   }
+  
   remove(ingrediant: string): void {
     const index = this.listOfSelectedIngrediants.indexOf(ingrediant);
   
@@ -55,6 +61,12 @@ export class AddRecipeCompComponent {
       next:(res)=>{
         this.ingrediants=res
         console.log(this.ingrediants)
+      }
+    })
+    this.recipeService.GetAllCategories().subscribe({
+      next:(response)=>{
+        console.log(response)
+        this.Categories=response
       }
     })
   }
@@ -78,6 +90,14 @@ export class AddRecipeCompComponent {
    this.listOfSelectedIngrediants.push(value)
     console.log("the fvlue yam"+value);
   }
+  getSelectedCategory(value:any){
+  
+    // Print selected value
+    //this.selectedvalue+=', '+value;
+   // this.recipe.ingredients=this.selectedvalue;
+   this.selectedCategory=value
+    console.log("the fvlue yam"+value);
+  }
   
   addRecipe()
   {
@@ -91,6 +111,7 @@ export class AddRecipeCompComponent {
     
     console.log("haa: "+this.recipe.image)
     this.recipe.ingredients=this.listOfSelectedIngrediants.toString()
+    this.recipe.category=this.selectedCategory
     this.recipeService.addREcipe(this.recipe,this.username)
     .subscribe({
       next:(_addedTask)=>{
@@ -128,10 +149,13 @@ export class AddRecipeCompComponent {
   Name:new FormControl('',Validators.minLength(3)),
   newIngrediant:new FormControl('',Validators.minLength(3)),
   Steps:new FormControl('',Validators.minLength(1)),
-  Ingrediant:new FormControl('',Validators.minLength(1))
+  Ingrediant:new FormControl('',Validators.required),
+  Category:new FormControl('',Validators.required) 
+
  })
  get Name(){return this.addNew.get('Name')}
  get Steps(){return this.addNew.get('Steps')}
  get Ingrediant(){return this.addNew.get('Ingrediant')}
+ get Category(){return this.addNew.get('Category')}
 }
 

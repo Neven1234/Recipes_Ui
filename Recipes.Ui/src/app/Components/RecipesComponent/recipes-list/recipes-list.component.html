@@ -1,13 +1,19 @@
 <hr>
-<div class="container" fxLayout="row wrap" fxLayoutGap="16px"  >
+<div    >
+  <div *ngIf="loading" >
+    <mat-spinner style="margin-left: 700px; " color="warn" diameter="40"></mat-spinner>
+  </div>
+  <div *ngIf="!loading" class="container" fxLayout="row wrap" fxLayoutGap="16px" >
     <mat-card class="example-card" *ngFor="let recipe of Recipes"  style="background-color: rgb(165, 134, 22);" >
-        <mat-card-header>
-          <mat-card-title>{{ recipe.name }}</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image *ngIf="recipe.image==null" src="assets/img/default.jpg" alt="Photo of a Shiba Inu">
-        <img mat-card-image *ngIf="recipe.image!=null" src={{recipe.image}} alt="Photo of a Shiba Inu">
-        <mat-card-actions>
-          <a  [routerLink]="['/View',recipe.id]"><button class="btn btn-primary pull-right" mat-raised-button style="background-color: rgb(125, 72, 11); margin-top: 10px;" > Details</button></a>
-        </mat-card-actions>
-      </mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ recipe.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image *ngIf="recipe.image==null" src="assets/img/default.jpg" alt="Photo of a Shiba Inu">
+      <img mat-card-image *ngIf="recipe.image!=null" src={{recipe.image}} alt="Photo of a Shiba Inu">
+      <mat-card-actions>
+        <a  [routerLink]="['/View',recipe.id]"><button class="btn btn-primary pull-right" mat-raised-button style="background-color: rgb(125, 72, 11); margin-top: 10px;" > Details</button></a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+    
 </div>
