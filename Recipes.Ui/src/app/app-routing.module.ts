@@ -51,7 +51,7 @@ const routes: Routes = [
   },
   {
     path:'FogetPassword',
-    component:ForgetPasswordComponent,canActivate:[authGuard]
+    component:ForgetPasswordComponent
   },
 ];
 

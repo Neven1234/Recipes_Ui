@@ -20,15 +20,15 @@
     <div *ngIf="clicked" style="margin-top: 40px;"  [formGroup]="changePassworedd">
         <div >
             <label>Current Password</label>
-            <input style="margin-left: 47px;" type="text" formControlName="oldpassword" [(ngModel)]="ChangePass.oldPasswored">
+            <input style="margin-left: 47px;" type="password" formControlName="oldpassword" [(ngModel)]="ChangePass.oldPasswored">
         </div>
         <div style="margin-top: 40px;">
             <label>New Password</label>
-            <input style="margin-left: 65px;" type="text" formControlName="newpassword" [(ngModel)]="ChangePass.newPasswored">
+            <input style="margin-left: 65px;" type="password" formControlName="newpassword" [(ngModel)]="ChangePass.newPasswored">
         </div>
         <div style="margin-top: 40px;">
             <label>Confirm Password</label>
-            <input style="margin-left: 47px;" type="text" formControlName="confirmpassword" [(ngModel)]="ChangePass.confirmPasswored">
+            <input style="margin-left: 47px;" type="password" formControlName="confirmpassword" [(ngModel)]="ChangePass.confirmPasswored">
         </div>
         <div style="margin-top: 40px;">
             <button (click)="ForgetPasswored()" >Forget Password</button>

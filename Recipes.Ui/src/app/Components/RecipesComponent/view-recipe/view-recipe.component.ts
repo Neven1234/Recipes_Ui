@@ -8,6 +8,7 @@ import { UserService } from 'src/app/Service/user.service';
 import { RateReview } from 'src/app/Models/RateAndReview';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { Favorite } from 'src/app/Models/Favorites';
+import { AmdDependency } from 'typescript';
 
 @Component({
   selector: 'app-view-recipe',
@@ -32,6 +33,7 @@ export class ViewRecipeComponent {
   reviews:RateReview[]=[]
   Favo:Favorite[]=[]
   recipeFavId:number
+  ID:any
   username:string=this.userservice.GetUserName();
   favorite:Favorite={
     id:0,
@@ -71,6 +73,9 @@ export class ViewRecipeComponent {
       
     })
     this.maxRatingArray=Array(this.maxRating).fill(0);
+   this. FavoritId()
+  }
+  FavoritId(){
     this.userservice.GetFavoriteRecipsId(this.username).subscribe({
       next:(response)=>{
         this.Favo=response
@@ -79,8 +84,11 @@ export class ViewRecipeComponent {
           {
             this.AddedToFavorite=true
             this.recipeFavId=Element.id
+            
           }
+          return this.recipeFavId
         })
+      
       }
     })
   }
@@ -171,6 +179,11 @@ export class ViewRecipeComponent {
             this.favorite=response
             this.recipeFavId=response.id
             alert("Added to favorite")
+            if(this.recipeFavId==undefined)
+            {
+              this.refrash()
+            }
+            
         },
         error:(response)=>{
           console.log(response)
@@ -181,12 +194,16 @@ export class ViewRecipeComponent {
   }
   RemoveFromFavorite()
   {
-    this.AddedToFavorite=false;
-    this.userservice.RemoveFromFavorite( this.recipeFavId).subscribe({
-      next:(res)=>{
-        alert("removed from favorite");
-      }
-    })
+    if(confirm("Are you Sure"))
+    {
+      this.AddedToFavorite=false;
+      this.userservice.RemoveFromFavorite( this.recipeFavId).subscribe({
+        next:(res)=>{
+          alert("removed from favorite");
+        }
+      })
+    }
+   
   }
   refrash(){
     window.location.reload()

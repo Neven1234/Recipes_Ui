@@ -92,8 +92,13 @@ export class EditDialogComponent implements OnInit{
     if(this.selectedImage)
     {
       this.recipe.image="https://localhost:7206/Resourcess/images/"+this.fileToUpload.name;
+      this.imageUrl=this.recipe.image
     }
-    this.recipe.category=this.selectedCategory;
+    if(this.selectedCategory!=null)
+    {
+      this.recipe.category=this.selectedCategory;
+    }
+   
     this.recipeService.EditRecipe(this.data.id,this.recipe).subscribe({
       next:(res)=>{
         console.log('path el sora ba3d el submit :'+this.recipe.image)
@@ -114,6 +119,7 @@ export class EditDialogComponent implements OnInit{
       this.imageUrl=event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
+    this.selectedImage=true
     console.log('esm el soraaa: '+this.fileToUpload.name)
   }
  onSubmit(Image){
