@@ -32,6 +32,13 @@ import { UserProfileComponent } from './Components/user-profile/user-profile.com
 import { UserSettingsComponent } from './Components/user-settings/user-settings.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { PlanningComponent } from './Components/planning/planning.component';
+import { CommonModule } from '@angular/common';
+import { AddPlanComponent } from './Components/planning/add-plan/add-plan.component';
+import { UsersComponent } from './Components/users/users.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +53,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     UserProfileComponent,
     UserSettingsComponent,
     ForgetPasswordComponent,
-    
+    PlanningComponent,
+    AddPlanComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +75,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatToolbarModule,
     MatSidenavModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FullCalendarModule,
+    CommonModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

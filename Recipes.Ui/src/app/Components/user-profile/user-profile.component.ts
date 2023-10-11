@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Favorite } from 'src/app/Models/Favorites';
 import { Recipe } from 'src/app/Models/ReipeModel';
+import { ShoppingList } from 'src/app/Models/Sopping';
 import { RecipesService } from 'src/app/Service/recipes.service';
 import { UserService } from 'src/app/Service/user.service';
 
@@ -10,11 +12,19 @@ import { UserService } from 'src/app/Service/user.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent {
-  constructor(private userService:UserService,private recipeService:RecipesService){}
+  constructor(private userService:UserService,private recipeService:RecipesService,private Router:Router){}
   userName:string
   Recipes :Recipe[]=[];
   Recipes2:Recipe[]=[];
-  favorites:Favorite[]=[]
+  favorites:Favorite[]=[];
+  shoppingList:ShoppingList[]=[];
+  oneItem:ShoppingList={
+    id:0,
+    userId:'',
+    ingredient:'',
+    purchased:false
+  }
+  userId:string=this.userService.GetUserIdFormSorage()
   i:Favorite={
     id:0,
     userId:'',
@@ -26,6 +36,11 @@ export class UserProfileComponent {
       next:(res)=>{
         console.log(res)
         this.Recipes=res;
+      }
+    })
+    this.userService.GetshoppingLsit(this.userId).subscribe({
+      next:(response)=>{
+        this.shoppingList=response
       }
     })
     this.Favorites()
@@ -72,5 +87,36 @@ export class UserProfileComponent {
   }
   refrash(){
     window.location.reload()
+  }
+  planForTheWeek(){
+    this.Router.navigate(['Plan'])
+  }
+  clear(){
+    if(confirm("Are you Sure")){
+      this.userService.ClearShoppingList(this.userId).subscribe({
+        next:(res)=>{
+          alert(res)
+          this.refrash()
+        }
+      })
+    }
+  }
+  Update(id:number){
+   this.userService.GetOneItemFromSoppingList(id).subscribe({
+    next:(res)=>{
+      this.oneItem=res;
+      if(this.oneItem.purchased==false)
+      {
+        this.oneItem.purchased=true
+      }
+      else{
+        this.oneItem.purchased=false
+      }
+      this.userService.MarkedAsPurchased(this.oneItem,id).subscribe({
+        next:(response)=>{
+        }
+      })
+    }
+   })
   }
 }

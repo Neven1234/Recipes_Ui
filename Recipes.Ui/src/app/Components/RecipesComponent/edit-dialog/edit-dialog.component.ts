@@ -104,6 +104,7 @@ export class EditDialogComponent implements OnInit{
         console.log('path el sora ba3d el submit :'+this.recipe.image)
         console.log(res)
         alert('Edited succssesfuly')
+        this.refrash()
       },
       error:(res)=>{
         console.log(res)
@@ -141,7 +142,8 @@ export class EditDialogComponent implements OnInit{
   Name:new FormControl('',Validators.minLength(3)),
   newIngrediant:new FormControl('',Validators.minLength(3)),
   Steps:new FormControl('',Validators.minLength(1)),
-  Category:new FormControl('',Validators.required) 
+  Category:new FormControl('',Validators.required) ,
+  Ingrediant:new FormControl('',Validators.required) 
 })
 get Name(){return this.Edite.get('Name')}
 get Steps(){return this.Edite.get('Steps')}

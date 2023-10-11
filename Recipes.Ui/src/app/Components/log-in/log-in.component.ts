@@ -21,7 +21,10 @@ export class LogInComponent {
     password:'',
     email:'null'
   }
+  Loading:boolean
   Expiration:Date;
+  mseesage:string='';
+  wrongPassOrUser:boolean=false
  userId(){
   this.services.GetUserId(this.userLog.userName).subscribe({
     next:(res)=>{
@@ -31,8 +34,10 @@ export class LogInComponent {
   })
  }
   LogIn(){
+    this.Loading=true
     this.services.logintest(this.userLog).subscribe({
       next:(respons)=>{
+       
         this.services.StoreUserName(this.userLog.userName);
         console.log('tokoko '+respons)
         var listt=respons.split(/[,:}]/);
@@ -40,10 +45,14 @@ export class LogInComponent {
        
         if(respons=='Username or Passwored are wrong'|| respons=='Please conferm your email by click the linke we sent it to you')
         {
-          alert(respons);
+          this.Loading=false
+          this.mseesage=respons;
+          this.wrongPassOrUser=true
+          //alert(respons);
           
         }
         else{
+          this.wrongPassOrUser=false
           this.app.isLogged=true;
           var  temp = listt[3].substring(1, listt[3].length-1);
           temp += ' 01:00';
@@ -51,8 +60,11 @@ export class LogInComponent {
           this.Expiration=new Date(temp);
           console.log("exp: "+this.Expiration);
           this.services.storeToken(listt[1]);
-          alert('Login successfully');
-          this.Router.navigate(['']);
+          //alert('Login successfully');
+          setTimeout( () => { 
+            this.Loading=false
+            this.Router.navigate(['']); }, 2500 );
+          
         }
        
       },
@@ -64,10 +76,10 @@ export class LogInComponent {
   }
 
   ForgetPasswored(){
-    this.Router.navigate(['FogetPassword'])
+    //this.Router.navigate(['FogetPassword'])
     this.services.ForgetPassword(this.userLog.userName).subscribe({
       next:(respose)=>{
-        alert(respose)
+        alert("email has been sent to you")
         console.log(respose)
       },
       error:(error)=>{

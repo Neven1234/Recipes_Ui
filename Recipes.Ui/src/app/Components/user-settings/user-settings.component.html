@@ -12,6 +12,14 @@
         <div style="margin-top: 40px;">
             <button mat-raised-button style="background-color: rgb(125, 72, 11);" (click)="UpdateUserNameOrEmail()">Save Changes</button>
         </div>
+        <div *ngIf="successeded" class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{message}}</strong>
+          </div>
+          <div *ngIf="SomethingWentWrong" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{message}}</strong> 
+          </div>
         <div style="margin-top: 50px;">
             <button mat-raised-button style="background-color: rgb(125, 72, 11);" (click)="changePassswordClicked()">Cange Password</button>
         </div>
@@ -31,7 +39,7 @@
             <input style="margin-left: 47px;" type="password" formControlName="confirmpassword" [(ngModel)]="ChangePass.confirmPasswored">
         </div>
         <div style="margin-top: 40px;">
-            <button (click)="ForgetPasswored()" >Forget Password</button>
+            <a (click)="ForgetPasswored()" href="FogetPassword" >Forget Password</a>
         </div>
         <div style="margin-top: 40px;">
             <button mat-raised-button style="background-color: rgb(125, 72, 11); color: white;"(click)="changePassword()">Save Changes</button>

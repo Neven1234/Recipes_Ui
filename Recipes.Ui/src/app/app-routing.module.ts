@@ -11,6 +11,8 @@ import { authGuard } from './gurds/auth.guard';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { UserSettingsComponent } from './Components/user-settings/user-settings.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
+import { PlanningComponent } from './Components/planning/planning.component';
+import { UsersComponent } from './Components/users/users.component';
 
 const routes: Routes = [
   {
@@ -53,6 +55,15 @@ const routes: Routes = [
     path:'FogetPassword',
     component:ForgetPasswordComponent
   },
+  {
+    path:'Plan',
+    component:PlanningComponent
+  },
+  {
+    path:'User/:userId',
+    component:UsersComponent
+  },
+
 ];
 
 @NgModule({

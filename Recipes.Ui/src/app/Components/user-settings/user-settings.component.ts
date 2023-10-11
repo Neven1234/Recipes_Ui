@@ -13,6 +13,7 @@ import { resetPassword } from 'src/app/Models/ResetPassword';
 export class UserSettingsComponent {
   constructor(private userService:UserService,private Router:Router){}
   usernam:string
+  userId:string=this.userService.GetUserIdFormSorage()
   user:User={
     id:0,
     userName:'',
@@ -20,6 +21,9 @@ export class UserSettingsComponent {
     password:'fhghfgfgd'
 
   }
+  message:string='';
+  SomethingWentWrong:boolean=false
+  successeded:boolean=false
   ChangePass:changePassword={
     oldPasswored:'',
     newPasswored:'',
@@ -27,8 +31,8 @@ export class UserSettingsComponent {
   }
   
   ngOnInit(){
-    this.usernam=this.userService.GetUserName()
-    this.userService.GetUser(this.usernam).subscribe({
+    this.usernam= this.userService.GetUserName()
+    this.userService.GetUser(this.userId).subscribe({
       next:(respons)=>{
         this.user=respons
       },
@@ -43,13 +47,14 @@ export class UserSettingsComponent {
  }
  UpdateUserNameOrEmail(){
   this.user.password='fhgjfhg'
-  console.log(this.user.userName+' em: '+this.user.email+ 'pass' +this.user.password)
 
   this.userService.UpdateData(this.user,this.usernam).subscribe({
     next:(response)=>{
-      alert(response)
+      //alert(response)
+      this.successeded=true
+      this.message=response
       this.userService.StoreUserName(this.user.userName)
-      this.Router.navigate(['Profile']);
+      setTimeout( () => {this.Router.navigate(['Profile']); }, 2500 );
     },
     error:(error)=>{
       console.log(error)
@@ -60,11 +65,16 @@ export class UserSettingsComponent {
   this.userService.ChangePassword(this.ChangePass,this.usernam).subscribe({
     next:(response)=>{
       
-      alert(response)
+      //alert(response)
       if(response=='Password changeed successfully')
       {
-        this.Router.navigate(['Profile']);
+        this.successeded=true
+        this.message=response
+        setTimeout( () => {this.Router.navigate(['Profile']); }, 2500 );
       }
+     else{
+      alert(response)
+     }
      
     },
     error:(error)=>{
@@ -73,10 +83,11 @@ export class UserSettingsComponent {
   })
  }
  ForgetPasswored(){
-  this.Router.navigate(['FogetPassword'])
+  //this.Router.navigate(['FogetPassword'])
+  alert("email has been sent to you")
   this.userService.ForgetPassword(this.usernam).subscribe({
     next:(respose)=>{
-      alert(respose)
+      alert("email has been sent to you")
       console.log(respose)
     },
     error:(error)=>{

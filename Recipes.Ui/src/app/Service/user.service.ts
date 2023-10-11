@@ -9,6 +9,9 @@ import { resetPassword } from '../Models/ResetPassword';
 import { StringLiteral } from 'typescript';
 import { Recipe } from '../Models/ReipeModel';
 import { Favorite } from '../Models/Favorites';
+import { Planner } from '../Models/Planner';
+import { ShoppingList } from '../Models/Sopping';
+import { Commentt } from '../Models/Commnts';
 
 
 
@@ -114,6 +117,8 @@ export class UserService {
     const options = {responseType: 'text' as 'json'};
     return this.http.post<string>(this.basUrl+'/api/User/reset-password/'+username,resetReq,options)
   }
+
+  
   //Favorites
   AddFavoriet(favorite:Favorite,username:string):Observable<Favorite>{
     const options = {responseType: 'text' as 'json'};
@@ -127,5 +132,52 @@ export class UserService {
   RemoveFromFavorite(Id:number):Observable<string>{
     const options = {responseType: 'text' as 'json'};
     return this.http.delete<string>(this.basUrl+'/api/Favorites/'+Id,options)
+  }
+
+  //////////planner
+
+  //Planner For the week
+  AddPlan(plan:Planner ,UserId:string ):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/Planner/'+UserId,plan,options)
+  }
+  //get planes
+  GetPlanes(userID:string):Observable<Planner[]>{
+    return this.http.get<Planner[]>(this.basUrl+'/api/Planner/'+userID)
+  }
+
+  /////// Shopping List
+
+  //Get Shoping List of the user
+  GetshoppingLsit(userId:string):Observable<ShoppingList[]>{
+    return this.http.get<ShoppingList[]>(this.basUrl+'/api/ShoppingList/'+userId)
+  }
+  //Add To the shoppingLsit
+  AddToShoppingList(shopping:ShoppingList,userId:string):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/ShoppingList/'+userId,shopping,options)
+  }
+  //Edit
+  MarkedAsPurchased(shopping:ShoppingList,id:number):Observable<string>
+  {
+    const options = {responseType: 'text' as 'json'};
+    return this.http.put<string>(this.basUrl+'/api/ShoppingList/'+id,shopping,options)
+  }
+
+  //Clear List
+  ClearShoppingList(userId:string):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.delete<string>(this.basUrl+'/api/ShoppingList/'+userId,options)
+  }
+
+  //get one item
+  GetOneItemFromSoppingList(id:number):Observable<ShoppingList>{
+    return this.http.get<ShoppingList>(this.basUrl+'/api/ShoppingList/getOne/'+id)
+  }
+
+  ///Comments
+  AddComment(comment:Commentt,userId:string):Observable<string>{
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post<string>(this.basUrl+'/api/FollowAndComment/Comment/'+userId,comment,options)
   }
 }

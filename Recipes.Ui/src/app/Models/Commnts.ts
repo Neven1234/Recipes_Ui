@@ -1,7 +1,6 @@
-export interface RateReview{
+export interface Commentt{
     id:number,
-    rate:number,
-    review:string,
+    comment:string,
     recipeId:number,
     userId:string,
     userName:string

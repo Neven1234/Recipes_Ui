@@ -33,13 +33,15 @@ export class ViewRecipeComponent {
   reviews:RateReview[]=[]
   Favo:Favorite[]=[]
   recipeFavId:number
-  ID:any
+  Loading:boolean
+  mseesage:string='';
   username:string=this.userservice.GetUserName();
   favorite:Favorite={
     id:0,
     userId:'',
     recipeId:0
   }
+  userName:string[]=[]
   AddedToFavorite:boolean=false;
   seeReviewClicked:boolean=false;
   rate:RateReview={
@@ -47,9 +49,12 @@ export class ViewRecipeComponent {
     rate:0,
     review:'',
     recipeId:0,
-    userId:''
+    userId:'',
+    userName:''
   }
   temp:string='';
+  counter:number=-1
+  Length:number[]=[]
   authorized:boolean=false;
   ngOnInit():void{
     this.route.paramMap.subscribe({
@@ -160,14 +165,15 @@ export class ViewRecipeComponent {
     this.recipeService.GetReviews(this.recipe.id).subscribe({
       next:(res)=>{
         this.reviews=res;
-        console.log(res)
       },
       error:(errorr)=>{
         console.log(errorr);
       }
     })
+    
   }
   AddToFavorite(){
+    this.Loading=true
     if(this.AddedToFavorite==false)
     {
       this.AddedToFavorite=true
@@ -178,11 +184,14 @@ export class ViewRecipeComponent {
           console.log("el respons el fady"+response)
             this.favorite=response
             this.recipeFavId=response.id
-            alert("Added to favorite")
             if(this.recipeFavId==undefined)
             {
-              this.refrash()
+               this.mseesage="Added to favorite"
+               setTimeout( () => { 
+                this.Loading=false
+                this.refrash(); }, 1000 );
             }
+            
             
         },
         error:(response)=>{
@@ -204,6 +213,9 @@ export class ViewRecipeComponent {
       })
     }
    
+  }
+  GetUsersNames(){
+
   }
   refrash(){
     window.location.reload()

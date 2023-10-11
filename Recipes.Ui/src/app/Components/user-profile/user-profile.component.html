@@ -9,7 +9,10 @@
         Your recipes
     </h1>
     <hr>
-    <div class="container" fxLayout="row wrap" fxLayoutGap="16px"  >
+    <div *ngIf="Recipes.length==0">
+      <p>You have no recipes</p>
+    </div>
+    <div *ngIf="Recipes.length!=0"  class="container" fxLayout="row wrap" fxLayoutGap="16px"  >
         <mat-card class="example-card" *ngFor="let recipe of Recipes"  style="background-color: rgb(165, 134, 22);" >
             <mat-card-header>
               <mat-card-title>{{ recipe.name }}</mat-card-title>
@@ -40,6 +43,38 @@
             </button>
           </mat-card-actions>
         </mat-card>
+  </div>
+  <hr>
+  <h1>
+     Plannes
+     <button class="btn btn-primary pull-right" mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 25px;" (click)="planForTheWeek()">Plans</button>
+  </h1>
+  <hr>
+ 
+  <hr>
+  <h1 *ngIf="shoppingList.length==0">
+     Shoping list
+     <button class="btn btn-primary pull-right" disabled mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 25px;" (click)="clear()">Clear</button>
+  </h1>
+  <h1 *ngIf="shoppingList.length!=0">
+    Shoping list
+    <button class="btn btn-primary pull-right" mat-raised-button style="background-color: rgb(125, 72, 11); margin-left: 25px;" (click)="clear()">Clear</button>
+ </h1>
+  
+  <hr>
+  <div *ngIf="shoppingList.length==0">
+    <h1>You have no shopping list right now</h1>
+  </div>
+  <div *ngIf="shoppingList.length!=0">
+    <div *ngFor="let item of shoppingList" style="display: inline;" >
+      <div>
+        <h1 >{{item.ingredient}}</h1>
+      </div>
+      <div style=" margin-left: 50px;">
+        <input  type="checkbox"  name="vehicle1" value="{{item.ingredient}}" (click)=" Update(item.id)" [(ngModel)]="item.purchased"  >
+      </div>
+      <hr>
+  </div>
   </div>
 </div>
 

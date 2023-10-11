@@ -1,3 +1,7 @@
+
+<div *ngIf="Loading">
+    <mat-spinner style="margin-left: 700px; " color="warn" diameter="40"></mat-spinner>
+</div>
 <div class="container my-5">
     <h1 class="mb-3"> Log in</h1>
     <div class="row">
@@ -12,12 +16,19 @@
                     <label for="Name">Password</label>
                     <input type="password" class="form-control" id="username" formControlName="Password"placeholder="Enter your Password" [(ngModel)]="userLog.password">
                     <span *ngIf="Password.invalid"> Password is required</span>
-
                 </div>
                 <div style="margin-top: 40px;">
                     <h3>if you forget your passwored enter your username and press the button below</h3>
-                    <button (click)="ForgetPasswored()" >Forget Password</button>
+                    <a (click)="ForgetPasswored()" href="FogetPassword">Forget Password</a>
                 </div>
+                <div *ngIf="Loading" class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Login successfully</strong>
+                  </div>
+                  <div *ngIf="wrongPassOrUser" class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{mseesage}}</strong> 
+                  </div>
                 <div style="margin-top: 25px;">
                     <button type="submit" class="btn btn-primary" (click)=" userId()" >Log in</button>
                     <button class="btn btn-primary" style="margin-left: 400px;" [routerLink]="['Register']"  >Regist</button>

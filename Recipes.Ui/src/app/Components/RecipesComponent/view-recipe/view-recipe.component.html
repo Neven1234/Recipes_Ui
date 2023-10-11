@@ -1,3 +1,6 @@
+<div *ngIf="Loading">
+  <mat-spinner style="margin-left: 700px; " color="warn" diameter="40"></mat-spinner>
+</div>
 <!-- Cards with media area -->
 <mat-card class="example-card" style="margin-left: 160px;">
     <mat-card-header>
@@ -27,7 +30,10 @@
     <mat-card-content>
      {{recipe.steps}} 
     </mat-card-content>
-   
+    <div *ngIf="Loading" class="alert alert-success alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>{{ mseesage}}</strong>
+    </div>
     <div class="action" *ngIf="authorized">
       <button (click)="openDialog(recipe)" mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" class="b1">Edit</button>
       <button (click)="deletRecipe(recipe.id)" mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" class="b2">Delete</button>
@@ -46,7 +52,10 @@
         <input type="text" [(ngModel)]="rate.review" formControlName="review">
         <span *ngIf="review.invalid"> Review is required </span> 
     </div>
-    <div>
+    <div *ngIf="rate.review.length==0">
+      <button mat-raised-button color="primary" disabled style="background-color: rgb(125, 72, 11); margin-left: 20px;" (click)=" send()"   >Send</button>
+    </div>
+    <div *ngIf="rate.review.length!=0">
       <button mat-raised-button color="primary" style="background-color: rgb(125, 72, 11); margin-left: 20px;" (click)=" send()"   >Send</button>
     </div>
     <div class="model"></div>
@@ -61,17 +70,27 @@
       </button>
     </div>
   </mat-card>
+  <hr>
+  <mat-card class="example-card" style="margin-left: 160px;">
+    <mat-card-header>
+    
+      <mat-card-title-group>
+        </mat-card-title-group>
+        <mat-card-title>Reviews</mat-card-title>
+        <div style="margin-left: 10px;" *ngIf="!seeReviewClicked" >
+          <button  mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" (click)="getReviews()" >More</button>
+        </div>
+        <div style="margin-left: 10px; margin-block-start:10px ;" *ngIf="seeReviewClicked">
+          <button  mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" (click)=" refrash()" >less</button>
+         </div>
+    </mat-card-header>
+  </mat-card>
+
+
   <mat-card class="example-card" style="margin-left: 160px;">
     <mat-card-header>
       <mat-card-title-group>
-        <mat-card-title>Reviews</mat-card-title>
         <div fxLayout="row">
-          <div style="margin-left: 10px;" *ngIf="!seeReviewClicked" >
-            <button  mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" (click)="getReviews()" >More</button>
-          </div>
-          <div style="margin-left: 10px; margin-block-start:10px ;" *ngIf="seeReviewClicked">
-            <button  mat-raised-button color="primary" style="background-color: rgb(125, 72, 11);" (click)=" refrash()" >less</button>
-           </div>
           <div class="container" >
             <div class="flex-container" fxLayout="row" *ngFor="let review of reviews">
               
@@ -84,6 +103,12 @@
               <mat-card-content style="margin-top: 20px; ">
                 {{review.review}}
               </mat-card-content>
+              <mat-card-content style="margin-top: 20px; "  *ngIf="review.userName!=username">
+                <a [routerLink]="['/User/',review.userId]">{{review.userName}}</a> 
+            </mat-card-content>
+            <mat-card-content style="margin-top: 20px; "  *ngIf="review.userName==username">
+              <a href="Profile">{{review.userName}}</a> 
+          </mat-card-content>
           </div>
         </div>
         </div>

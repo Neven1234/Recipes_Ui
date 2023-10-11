@@ -1,0 +1,18 @@
+<div style="background-color: white;">
+    <div style="margin-left: 180px; background-color: white;">
+        <div style="background-color: white; margin-left: 20px;">
+            <h2 style="margin-right: 2%;"> Select Recipe </h2>
+            <div style="margin-right: 2%;">
+                <select #reff (change)="getSelectedCategory(reff.value)">
+                    <option value=""></option>
+                    <option *ngFor="let name of RecipeNames">{{name}}</option>
+                </select>
+            </div>
+            <div style="margin-top: 50px;">
+                <button  matDialogClose class="b2" style="background-color: rgb(125, 72, 11); margin-right: 200px;" mat-raised-button color="primary" (click)="submit()">save</button>
+                <button  matDialogClose class="b2"  style="background-color: rgb(125, 72, 11);" mat-raised-button color="primary">cancel</button>
+            </div>
+        </div>
+        
+    </div>    
+</div>
